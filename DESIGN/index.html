@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design System Inspired by Apple | Octostack</title>
+    <meta name="description" content="Specialized infrastructure, SRE, and software development for digital identity systems, EUDI Wallet implementations, and gematik-compliant digital health solutions.">
+    <meta name="keywords" content="digital identity, EUDI Wallet, eIDAS, digital health, gematik, Telematikinfrastruktur, identity infrastructure, healthcare IT, SRE, DevOps, cloud infrastructure">
+
+    <link rel="stylesheet" href="/assets/css/main.css">
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="flex flex-col min-h-screen">
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-secondary-200 shadow-sm">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20 md:h-24">
+            <!-- Logo -->
+            <a href="/" class="flex items-center space-x-3">
+                <img src="/assets/images/octostack-white.png" alt="Octostack Logo" class="h-12 md:h-16 w-auto">
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="nav-link text-sm font-medium transition-colors hover:text-primary-600 cursor-pointer text-secondary-600">
+                    Home
+                </a>
+                <a href="#services" class="nav-link text-sm font-medium transition-colors hover:text-primary-600 cursor-pointer text-secondary-600">
+                    Services
+                </a>
+                <a href="#about" class="nav-link text-sm font-medium transition-colors hover:text-primary-600 cursor-pointer text-secondary-600">
+                    About
+                </a>
+                <a href="#contact" class="nav-link text-sm font-medium transition-colors hover:text-primary-600 cursor-pointer text-secondary-600">
+                    Contact
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-secondary-600 hover:text-primary-600" aria-label="Toggle menu">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <nav id="mobile-menu" class="hidden md:hidden py-4 border-t border-secondary-200">
+            <a href="#home" class="nav-link block py-3 text-base font-medium transition-colors cursor-pointer text-secondary-600 hover:text-primary-600">
+                Home
+            </a>
+            <a href="#services" class="nav-link block py-3 text-base font-medium transition-colors cursor-pointer text-secondary-600 hover:text-primary-600">
+                Services
+            </a>
+            <a href="#about" class="nav-link block py-3 text-base font-medium transition-colors cursor-pointer text-secondary-600 hover:text-primary-600">
+                About
+            </a>
+            <a href="#contact" class="nav-link block py-3 text-base font-medium transition-colors cursor-pointer text-secondary-600 hover:text-primary-600">
+                Contact
+            </a>
+        </nav>
+    </div>
+</header>
+
+
+    <main class="flex-grow">
+        <h1 id="design-system-inspired-by-apple">Design System Inspired by Apple</h1>
+
+<h2 id="1-visual-theme--atmosphere">1. Visual Theme &amp; Atmosphere</h2>
+
+<p>Apple’s website is a masterclass in controlled drama — vast expanses of pure black and near-white serve as cinematic backdrops for products that are photographed as if they were sculptures in a gallery. The design philosophy is reductive to its core: every pixel exists in service of the product, and the interface itself retreats until it becomes invisible. This is not minimalism as aesthetic preference; it is minimalism as reverence for the object.</p>
+
+<p>The typography anchors everything. San Francisco (SF Pro Display for large sizes, SF Pro Text for body) is Apple’s proprietary typeface, engineered with optical sizing that automatically adjusts letterforms depending on point size. At display sizes (56px), weight 600 with a tight line-height of 1.07 and subtle negative letter-spacing (-0.28px) creates headlines that feel machined rather than typeset — precise, confident, and unapologetically direct. At body sizes (17px), the tracking loosens slightly (-0.374px) and line-height opens to 1.47, creating a reading rhythm that is comfortable without ever feeling slack.</p>
+
+<p>The color story is starkly binary. Product sections alternate between pure black (<code class="language-plaintext highlighter-rouge">#000000</code>) backgrounds with white text and light gray (<code class="language-plaintext highlighter-rouge">#f5f5f7</code>) backgrounds with near-black text (<code class="language-plaintext highlighter-rouge">#1d1d1f</code>). This creates a cinematic pacing — dark sections feel immersive and premium, light sections feel open and informational. The only chromatic accent is Apple Blue (<code class="language-plaintext highlighter-rouge">#0071e3</code>), reserved exclusively for interactive elements: links, buttons, and focus states. This singular accent color in a sea of neutrals gives every clickable element unmistakable visibility.</p>
+
+<p><strong>Key Characteristics:</strong></p>
+<ul>
+  <li>SF Pro Display/Text with optical sizing — letterforms adapt automatically to size context</li>
+  <li>Binary light/dark section rhythm: black (<code class="language-plaintext highlighter-rouge">#000000</code>) alternating with light gray (<code class="language-plaintext highlighter-rouge">#f5f5f7</code>)</li>
+  <li>Single accent color: Apple Blue (<code class="language-plaintext highlighter-rouge">#0071e3</code>) reserved exclusively for interactive elements</li>
+  <li>Product-as-hero photography on solid color fields — no gradients, no textures, no distractions</li>
+  <li>Extremely tight headline line-heights (1.07-1.14) creating compressed, billboard-like impact</li>
+  <li>Full-width section layout with centered content — the viewport IS the canvas</li>
+  <li>Pill-shaped CTAs (980px radius) creating soft, approachable action buttons</li>
+  <li>Generous whitespace between sections allowing each product moment to breathe</li>
+</ul>
+
+<h2 id="2-color-palette--roles">2. Color Palette &amp; Roles</h2>
+
+<h3 id="primary">Primary</h3>
+<ul>
+  <li><strong>Pure Black</strong> (<code class="language-plaintext highlighter-rouge">#000000</code>): Hero section backgrounds, immersive product showcases. The darkest canvas for the brightest products.</li>
+  <li><strong>Light Gray</strong> (<code class="language-plaintext highlighter-rouge">#f5f5f7</code>): Alternate section backgrounds, informational areas. Not white — the slight blue-gray tint prevents sterility.</li>
+  <li><strong>Near Black</strong> (<code class="language-plaintext highlighter-rouge">#1d1d1f</code>): Primary text on light backgrounds, dark button fills. Slightly warmer than pure black for comfortable reading.</li>
+</ul>
+
+<h3 id="interactive">Interactive</h3>
+<ul>
+  <li><strong>Apple Blue</strong> (<code class="language-plaintext highlighter-rouge">#0071e3</code>): <code class="language-plaintext highlighter-rouge">--sk-focus-color</code>, primary CTA backgrounds, focus rings. The ONLY chromatic color in the interface.</li>
+  <li><strong>Link Blue</strong> (<code class="language-plaintext highlighter-rouge">#0066cc</code>): <code class="language-plaintext highlighter-rouge">--sk-body-link-color</code>, inline text links. Slightly darker than Apple Blue for text-level readability.</li>
+  <li><strong>Bright Blue</strong> (<code class="language-plaintext highlighter-rouge">#2997ff</code>): Links on dark backgrounds. Higher luminance for contrast on black sections.</li>
+</ul>
+
+<h3 id="text">Text</h3>
+<ul>
+  <li><strong>White</strong> (<code class="language-plaintext highlighter-rouge">#ffffff</code>): Text on dark backgrounds, button text on blue/dark CTAs.</li>
+  <li><strong>Near Black</strong> (<code class="language-plaintext highlighter-rouge">#1d1d1f</code>): Primary body text on light backgrounds.</li>
+  <li><strong>Black 80%</strong> (<code class="language-plaintext highlighter-rouge">rgba(0, 0, 0, 0.8)</code>): Secondary text, nav items on light backgrounds. Slightly softened.</li>
+  <li><strong>Black 48%</strong> (<code class="language-plaintext highlighter-rouge">rgba(0, 0, 0, 0.48)</code>): Tertiary text, disabled states, carousel controls.</li>
+</ul>
+
+<h3 id="surface--dark-variants">Surface &amp; Dark Variants</h3>
+<ul>
+  <li><strong>Dark Surface 1</strong> (<code class="language-plaintext highlighter-rouge">#272729</code>): Card backgrounds in dark sections.</li>
+  <li><strong>Dark Surface 2</strong> (<code class="language-plaintext highlighter-rouge">#262628</code>): Subtle surface variation in dark contexts.</li>
+  <li><strong>Dark Surface 3</strong> (<code class="language-plaintext highlighter-rouge">#28282a</code>): Elevated cards on dark backgrounds.</li>
+  <li><strong>Dark Surface 4</strong> (<code class="language-plaintext highlighter-rouge">#2a2a2d</code>): Highest dark surface elevation.</li>
+  <li><strong>Dark Surface 5</strong> (<code class="language-plaintext highlighter-rouge">#242426</code>): Deepest dark surface tone.</li>
+</ul>
+
+<h3 id="button-states">Button States</h3>
+<ul>
+  <li><strong>Button Active</strong> (<code class="language-plaintext highlighter-rouge">#ededf2</code>): Active/pressed state for light buttons.</li>
+  <li><strong>Button Default Light</strong> (<code class="language-plaintext highlighter-rouge">#fafafc</code>): Search/filter button backgrounds.</li>
+  <li><strong>Overlay</strong> (<code class="language-plaintext highlighter-rouge">rgba(210, 210, 215, 0.64)</code>): Media control scrims, overlays.</li>
+  <li><strong>White 32%</strong> (<code class="language-plaintext highlighter-rouge">rgba(255, 255, 255, 0.32)</code>): Hover state on dark modal close buttons.</li>
+</ul>
+
+<h3 id="shadows">Shadows</h3>
+<ul>
+  <li><strong>Card Shadow</strong> (<code class="language-plaintext highlighter-rouge">rgba(0, 0, 0, 0.22) 3px 5px 30px 0px</code>): Soft, diffused elevation for product cards. Offset and wide blur create a natural, photographic shadow.</li>
+</ul>
+
+<h2 id="3-typography-rules">3. Typography Rules</h2>
+
+<h3 id="font-family">Font Family</h3>
+<ul>
+  <li><strong>Display</strong>: <code class="language-plaintext highlighter-rouge">SF Pro Display</code>, with fallbacks: <code class="language-plaintext highlighter-rouge">SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif</code></li>
+  <li><strong>Body</strong>: <code class="language-plaintext highlighter-rouge">SF Pro Text</code>, with fallbacks: <code class="language-plaintext highlighter-rouge">SF Pro Icons, Helvetica Neue, Helvetica, Arial, sans-serif</code></li>
+  <li>SF Pro Display is used at 20px and above; SF Pro Text is optimized for 19px and below.</li>
+</ul>
+
+<h3 id="hierarchy">Hierarchy</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Role</th>
+      <th>Font</th>
+      <th>Size</th>
+      <th>Weight</th>
+      <th>Line Height</th>
+      <th>Letter Spacing</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Display Hero</td>
+      <td>SF Pro Display</td>
+      <td>56px (3.50rem)</td>
+      <td>600</td>
+      <td>1.07 (tight)</td>
+      <td>-0.28px</td>
+      <td>Product launch headlines, maximum impact</td>
+    </tr>
+    <tr>
+      <td>Section Heading</td>
+      <td>SF Pro Display</td>
+      <td>40px (2.50rem)</td>
+      <td>600</td>
+      <td>1.10 (tight)</td>
+      <td>normal</td>
+      <td>Feature section titles</td>
+    </tr>
+    <tr>
+      <td>Tile Heading</td>
+      <td>SF Pro Display</td>
+      <td>28px (1.75rem)</td>
+      <td>400</td>
+      <td>1.14 (tight)</td>
+      <td>0.196px</td>
+      <td>Product tile headlines</td>
+    </tr>
+    <tr>
+      <td>Card Title</td>
+      <td>SF Pro Display</td>
+      <td>21px (1.31rem)</td>
+      <td>700</td>
+      <td>1.19 (tight)</td>
+      <td>0.231px</td>
+      <td>Bold card headings</td>
+    </tr>
+    <tr>
+      <td>Sub-heading</td>
+      <td>SF Pro Display</td>
+      <td>21px (1.31rem)</td>
+      <td>400</td>
+      <td>1.19 (tight)</td>
+      <td>0.231px</td>
+      <td>Regular card headings</td>
+    </tr>
+    <tr>
+      <td>Nav Heading</td>
+      <td>SF Pro Text</td>
+      <td>34px (2.13rem)</td>
+      <td>600</td>
+      <td>1.47</td>
+      <td>-0.374px</td>
+      <td>Large navigation headings</td>
+    </tr>
+    <tr>
+      <td>Sub-nav</td>
+      <td>SF Pro Text</td>
+      <td>24px (1.50rem)</td>
+      <td>300</td>
+      <td>1.50</td>
+      <td>normal</td>
+      <td>Light sub-navigation text</td>
+    </tr>
+    <tr>
+      <td>Body</td>
+      <td>SF Pro Text</td>
+      <td>17px (1.06rem)</td>
+      <td>400</td>
+      <td>1.47</td>
+      <td>-0.374px</td>
+      <td>Standard reading text</td>
+    </tr>
+    <tr>
+      <td>Body Emphasis</td>
+      <td>SF Pro Text</td>
+      <td>17px (1.06rem)</td>
+      <td>600</td>
+      <td>1.24 (tight)</td>
+      <td>-0.374px</td>
+      <td>Emphasized body text, labels</td>
+    </tr>
+    <tr>
+      <td>Button Large</td>
+      <td>SF Pro Text</td>
+      <td>18px (1.13rem)</td>
+      <td>300</td>
+      <td>1.00 (tight)</td>
+      <td>normal</td>
+      <td>Large button text, light weight</td>
+    </tr>
+    <tr>
+      <td>Button</td>
+      <td>SF Pro Text</td>
+      <td>17px (1.06rem)</td>
+      <td>400</td>
+      <td>2.41 (relaxed)</td>
+      <td>normal</td>
+      <td>Standard button text</td>
+    </tr>
+    <tr>
+      <td>Link</td>
+      <td>SF Pro Text</td>
+      <td>14px (0.88rem)</td>
+      <td>400</td>
+      <td>1.43</td>
+      <td>-0.224px</td>
+      <td>Body links, “Learn more”</td>
+    </tr>
+    <tr>
+      <td>Caption</td>
+      <td>SF Pro Text</td>
+      <td>14px (0.88rem)</td>
+      <td>400</td>
+      <td>1.29 (tight)</td>
+      <td>-0.224px</td>
+      <td>Secondary text, descriptions</td>
+    </tr>
+    <tr>
+      <td>Caption Bold</td>
+      <td>SF Pro Text</td>
+      <td>14px (0.88rem)</td>
+      <td>600</td>
+      <td>1.29 (tight)</td>
+      <td>-0.224px</td>
+      <td>Emphasized captions</td>
+    </tr>
+    <tr>
+      <td>Micro</td>
+      <td>SF Pro Text</td>
+      <td>12px (0.75rem)</td>
+      <td>400</td>
+      <td>1.33</td>
+      <td>-0.12px</td>
+      <td>Fine print, footnotes</td>
+    </tr>
+    <tr>
+      <td>Micro Bold</td>
+      <td>SF Pro Text</td>
+      <td>12px (0.75rem)</td>
+      <td>600</td>
+      <td>1.33</td>
+      <td>-0.12px</td>
+      <td>Bold fine print</td>
+    </tr>
+    <tr>
+      <td>Nano</td>
+      <td>SF Pro Text</td>
+      <td>10px (0.63rem)</td>
+      <td>400</td>
+      <td>1.47</td>
+      <td>-0.08px</td>
+      <td>Legal text, smallest size</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="principles">Principles</h3>
+<ul>
+  <li><strong>Optical sizing as philosophy</strong>: SF Pro automatically switches between Display and Text optical sizes. Display versions have wider letter spacing and thinner strokes optimized for large sizes; Text versions are tighter and sturdier for small sizes. This means the font literally changes its DNA based on context.</li>
+  <li><strong>Weight restraint</strong>: The scale spans 300 (light) to 700 (bold) but most text lives at 400 (regular) and 600 (semibold). Weight 300 appears only on large decorative text. Weight 700 is rare, used only for bold card titles.</li>
+  <li><strong>Negative tracking at all sizes</strong>: Unlike most systems that only track headlines, Apple applies subtle negative letter-spacing even at body sizes (-0.374px at 17px, -0.224px at 14px, -0.12px at 12px). This creates universally tight, efficient text.</li>
+  <li><strong>Extreme line-height range</strong>: Headlines compress to 1.07 while body text opens to 1.47, and some button contexts stretch to 2.41. This dramatic range creates clear visual hierarchy through rhythm alone.</li>
+</ul>
+
+<h2 id="4-component-stylings">4. Component Stylings</h2>
+
+<h3 id="buttons">Buttons</h3>
+
+<p><strong>Primary Blue (CTA)</strong></p>
+<ul>
+  <li>Background: <code class="language-plaintext highlighter-rouge">#0071e3</code> (Apple Blue)</li>
+  <li>Text: <code class="language-plaintext highlighter-rouge">#ffffff</code></li>
+  <li>Padding: 8px 15px</li>
+  <li>Radius: 8px</li>
+  <li>Border: 1px solid transparent</li>
+  <li>Font: SF Pro Text, 17px, weight 400</li>
+  <li>Hover: background brightens slightly</li>
+  <li>Active: <code class="language-plaintext highlighter-rouge">#ededf2</code> background shift</li>
+  <li>Focus: <code class="language-plaintext highlighter-rouge">2px solid var(--sk-focus-color, #0071E3)</code> outline</li>
+  <li>Use: Primary call-to-action (“Buy”, “Shop iPhone”)</li>
+</ul>
+
+<p><strong>Primary Dark</strong></p>
+<ul>
+  <li>Background: <code class="language-plaintext highlighter-rouge">#1d1d1f</code></li>
+  <li>Text: <code class="language-plaintext highlighter-rouge">#ffffff</code></li>
+  <li>Padding: 8px 15px</li>
+  <li>Radius: 8px</li>
+  <li>Font: SF Pro Text, 17px, weight 400</li>
+  <li>Use: Secondary CTA, dark variant</li>
+</ul>
+
+<p><strong>Pill Link (Learn More / Shop)</strong></p>
+<ul>
+  <li>Background: transparent</li>
+  <li>Text: <code class="language-plaintext highlighter-rouge">#0066cc</code> (light bg) or <code class="language-plaintext highlighter-rouge">#2997ff</code> (dark bg)</li>
+  <li>Radius: 980px (full pill)</li>
+  <li>Border: 1px solid <code class="language-plaintext highlighter-rouge">#0066cc</code></li>
+  <li>Font: SF Pro Text, 14px-17px</li>
+  <li>Hover: underline decoration</li>
+  <li>Use: “Learn more” and “Shop” links — the signature Apple inline CTA</li>
+</ul>
+
+<p><strong>Filter / Search Button</strong></p>
+<ul>
+  <li>Background: <code class="language-plaintext highlighter-rouge">#fafafc</code></li>
+  <li>Text: <code class="language-plaintext highlighter-rouge">rgba(0, 0, 0, 0.8)</code></li>
+  <li>Padding: 0px 14px</li>
+  <li>Radius: 11px</li>
+  <li>Border: 3px solid <code class="language-plaintext highlighter-rouge">rgba(0, 0, 0, 0.04)</code></li>
+  <li>Focus: <code class="language-plaintext highlighter-rouge">2px solid var(--sk-focus-color, #0071E3)</code> outline</li>
+  <li>Use: Search bars, filter controls</li>
+</ul>
+
+<p><strong>Media Control</strong></p>
+<ul>
+  <li>Background: <code class="language-plaintext highlighter-rouge">rgba(210, 210, 215, 0.64)</code></li>
+  <li>Text: <code class="language-plaintext highlighter-rouge">rgba(0, 0, 0, 0.48)</code></li>
+  <li>Radius: 50% (circular)</li>
+  <li>Active: scale(0.9), background shifts</li>
+  <li>Focus: <code class="language-plaintext highlighter-rouge">2px solid var(--sk-focus-color, #0071e3)</code> outline, white bg, black text</li>
+  <li>Use: Play/pause, carousel arrows</li>
+</ul>
+
+<h3 id="cards--containers">Cards &amp; Containers</h3>
+<ul>
+  <li>Background: <code class="language-plaintext highlighter-rouge">#f5f5f7</code> (light) or <code class="language-plaintext highlighter-rouge">#272729</code>-<code class="language-plaintext highlighter-rouge">#2a2a2d</code> (dark)</li>
+  <li>Border: none (borders are rare in Apple’s system)</li>
+  <li>Radius: 5px-8px</li>
+  <li>Shadow: <code class="language-plaintext highlighter-rouge">rgba(0, 0, 0, 0.22) 3px 5px 30px 0px</code> for elevated product cards</li>
+  <li>Content: centered, generous padding</li>
+  <li>Hover: no standard hover state — cards are static, links within them are interactive</li>
+</ul>
+
+<h3 id="navigation">Navigation</h3>
+<ul>
+  <li>Background: <code class="language-plaintext highlighter-rouge">rgba(0, 0, 0, 0.8)</code> (translucent dark) with <code class="language-plaintext highlighter-rouge">backdrop-filter: saturate(180%) blur(20px)</code></li>
+  <li>Height: 48px (compact)</li>
+  <li>Text: <code class="language-plaintext highlighter-rouge">#ffffff</code> at 12px, weight 400</li>
+  <li>Active: underline on hover</li>
+  <li>Logo: Apple logomark (SVG) centered or left-aligned, 17x48px viewport</li>
+  <li>Mobile: collapses to hamburger with full-screen overlay menu</li>
+  <li>The nav floats above content, maintaining its dark translucent glass regardless of section background</li>
+</ul>
+
+<h3 id="image-treatment">Image Treatment</h3>
+<ul>
+  <li>Products on solid-color fields (black or white) — no backgrounds, no context, just the object</li>
+  <li>Full-bleed section images that span the entire viewport width</li>
+  <li>Product photography at extremely high resolution with subtle shadows</li>
+  <li>Lifestyle images confined to rounded-corner containers (12px+ radius)</li>
+</ul>
+
+<h3 id="distinctive-components">Distinctive Components</h3>
+
+<p><strong>Product Hero Module</strong></p>
+<ul>
+  <li>Full-viewport-width section with solid background (black or <code class="language-plaintext highlighter-rouge">#f5f5f7</code>)</li>
+  <li>Product name as the primary headline (SF Pro Display, 56px, weight 600)</li>
+  <li>One-line descriptor below in lighter weight</li>
+  <li>Two pill CTAs side by side: “Learn more” (outline) and “Buy” / “Shop” (filled)</li>
+</ul>
+
+<p><strong>Product Grid Tile</strong></p>
+<ul>
+  <li>Square or near-square card on contrasting background</li>
+  <li>Product image dominating 60-70% of the tile</li>
+  <li>Product name + one-line description below</li>
+  <li>“Learn more” and “Shop” link pair at bottom</li>
+</ul>
+
+<p><strong>Feature Comparison Strip</strong></p>
+<ul>
+  <li>Horizontal scroll of product variants</li>
+  <li>Each variant as a vertical card with image, name, and key specs</li>
+  <li>Minimal chrome — the products speak for themselves</li>
+</ul>
+
+<h2 id="5-layout-principles">5. Layout Principles</h2>
+
+<h3 id="spacing-system">Spacing System</h3>
+<ul>
+  <li>Base unit: 8px</li>
+  <li>Scale: 2px, 4px, 5px, 6px, 7px, 8px, 9px, 10px, 11px, 14px, 15px, 17px, 20px, 24px</li>
+  <li>Notable characteristic: the scale is dense at small sizes (2-11px) with granular 1px increments, then jumps in larger steps. This allows precise micro-adjustments for typography and icon alignment.</li>
+</ul>
+
+<h3 id="grid--container">Grid &amp; Container</h3>
+<ul>
+  <li>Max content width: approximately 980px (the recurring “980px radius” in pill buttons echoes this width)</li>
+  <li>Hero: full-viewport-width sections with centered content block</li>
+  <li>Product grids: 2-3 column layouts within centered container</li>
+  <li>Single-column for hero moments — one product, one message, full attention</li>
+  <li>No visible grid lines or gutters — spacing creates implied structure</li>
+</ul>
+
+<h3 id="whitespace-philosophy">Whitespace Philosophy</h3>
+<ul>
+  <li><strong>Cinematic breathing room</strong>: Each product section occupies a full viewport height (or close to it). The whitespace between products is not empty — it is the pause between scenes in a film.</li>
+  <li><strong>Vertical rhythm through color blocks</strong>: Rather than using spacing alone to separate sections, Apple uses alternating background colors (black, <code class="language-plaintext highlighter-rouge">#f5f5f7</code>, white). Each color change signals a new “scene.”</li>
+  <li><strong>Compression within, expansion between</strong>: Text blocks are tightly set (negative letter-spacing, tight line-heights) while the space surrounding them is vast. This creates a tension between density and openness.</li>
+</ul>
+
+<h3 id="border-radius-scale">Border Radius Scale</h3>
+<ul>
+  <li>Micro (5px): Small containers, link tags</li>
+  <li>Standard (8px): Buttons, product cards, image containers</li>
+  <li>Comfortable (11px): Search inputs, filter buttons</li>
+  <li>Large (12px): Feature panels, lifestyle image containers</li>
+  <li>Full Pill (980px): CTA links (“Learn more”, “Shop”), navigation pills</li>
+  <li>Circle (50%): Media controls (play/pause, arrows)</li>
+</ul>
+
+<h2 id="6-depth--elevation">6. Depth &amp; Elevation</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Level</th>
+      <th>Treatment</th>
+      <th>Use</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Flat (Level 0)</td>
+      <td>No shadow, solid background</td>
+      <td>Standard content sections, text blocks</td>
+    </tr>
+    <tr>
+      <td>Navigation Glass</td>
+      <td><code class="language-plaintext highlighter-rouge">backdrop-filter: saturate(180%) blur(20px)</code> on <code class="language-plaintext highlighter-rouge">rgba(0,0,0,0.8)</code></td>
+      <td>Sticky navigation bar — the glass effect</td>
+    </tr>
+    <tr>
+      <td>Subtle Lift (Level 1)</td>
+      <td><code class="language-plaintext highlighter-rouge">rgba(0, 0, 0, 0.22) 3px 5px 30px 0px</code></td>
+      <td>Product cards, floating elements</td>
+    </tr>
+    <tr>
+      <td>Media Control</td>
+      <td><code class="language-plaintext highlighter-rouge">rgba(210, 210, 215, 0.64)</code> background with scale transforms</td>
+      <td>Play/pause buttons, carousel controls</td>
+    </tr>
+    <tr>
+      <td>Focus (Accessibility)</td>
+      <td><code class="language-plaintext highlighter-rouge">2px solid #0071e3</code> outline</td>
+      <td>Keyboard focus on all interactive elements</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>Shadow Philosophy</strong>: Apple uses shadow extremely sparingly. The primary shadow (<code class="language-plaintext highlighter-rouge">3px 5px 30px</code> with 0.22 opacity) is soft, wide, and offset — mimicking a diffused studio light casting a natural shadow beneath a physical object. This reinforces the “product as physical sculpture” metaphor. Most elements have NO shadow at all; elevation comes from background color contrast (dark card on darker background, or light card on slightly different gray).</p>
+
+<h3 id="decorative-depth">Decorative Depth</h3>
+<ul>
+  <li>Navigation glass: the translucent, blurred navigation bar is the most recognizable depth element, creating a sense of floating UI above scrolling content</li>
+  <li>Section color transitions: depth is implied by the alternation between black and light gray sections rather than by shadows</li>
+  <li>Product photography shadows: the products themselves cast shadows in their photography, so the UI doesn’t need to add synthetic ones</li>
+</ul>
+
+<h2 id="7-dos-and-donts">7. Do’s and Don’ts</h2>
+
+<h3 id="do">Do</h3>
+<ul>
+  <li>Use SF Pro Display at 20px+ and SF Pro Text below 20px — respect the optical sizing boundary</li>
+  <li>Apply negative letter-spacing at all text sizes (not just headlines) — Apple tracks tight universally</li>
+  <li>Use Apple Blue (<code class="language-plaintext highlighter-rouge">#0071e3</code>) ONLY for interactive elements — it must be the singular accent</li>
+  <li>Alternate between black and light gray (<code class="language-plaintext highlighter-rouge">#f5f5f7</code>) section backgrounds for cinematic rhythm</li>
+  <li>Use 980px pill radius for CTA links — the signature Apple link shape</li>
+  <li>Keep product imagery on solid-color fields with no competing visual elements</li>
+  <li>Use the translucent dark glass (<code class="language-plaintext highlighter-rouge">rgba(0,0,0,0.8)</code> + blur) for sticky navigation</li>
+  <li>Compress headline line-heights to 1.07-1.14 — Apple headlines are famously tight</li>
+</ul>
+
+<h3 id="dont">Don’t</h3>
+<ul>
+  <li>Don’t introduce additional accent colors — the entire chromatic budget is spent on blue</li>
+  <li>Don’t use heavy shadows or multiple shadow layers — Apple’s shadow system is one soft diffused shadow or nothing</li>
+  <li>Don’t use borders on cards or containers — Apple almost never uses visible borders (except on specific buttons)</li>
+  <li>Don’t apply wide letter-spacing to SF Pro — it is designed to run tight at every size</li>
+  <li>Don’t use weight 800 or 900 — the maximum is 700 (bold), and even that is rare</li>
+  <li>Don’t add textures, patterns, or gradients to backgrounds — solid colors only</li>
+  <li>Don’t make the navigation opaque — the glass blur effect is essential to the Apple UI identity</li>
+  <li>Don’t center-align body text — Apple body copy is left-aligned; only headlines center</li>
+  <li>Don’t use rounded corners larger than 12px on rectangular elements (980px is for pills only)</li>
+</ul>
+
+<h2 id="8-responsive-behavior">8. Responsive Behavior</h2>
+
+<h3 id="breakpoints">Breakpoints</h3>
+<p>| Name | Width | Key Changes |
+|——|——-|————-|
+| Small Mobile | &lt;360px | Minimum supported, single column |
+| Mobile | 360-480px | Standard mobile layout |
+| Mobile Large | 480-640px | Wider single column, larger images |
+| Tablet Small | 640-834px | 2-column product grids begin |
+| Tablet | 834-1024px | Full tablet layout, expanded nav |
+| Desktop Small | 1024-1070px | Standard desktop layout begins |
+| Desktop | 1070-1440px | Full layout, max content width |
+| Large Desktop | &gt;1440px | Centered with generous margins |</p>
+
+<h3 id="touch-targets">Touch Targets</h3>
+<ul>
+  <li>Primary CTAs: 8px 15px padding creating ~44px touch height</li>
+  <li>Navigation links: 48px height with adequate spacing</li>
+  <li>Media controls: 50% radius circular buttons, minimum 44x44px</li>
+  <li>“Learn more” pills: generous padding for comfortable tapping</li>
+</ul>
+
+<h3 id="collapsing-strategy">Collapsing Strategy</h3>
+<ul>
+  <li>Hero headlines: 56px Display → 40px → 28px on mobile, maintaining tight line-height proportionally</li>
+  <li>Product grids: 3-column → 2-column → single column stacked</li>
+  <li>Navigation: full horizontal nav → compact mobile menu (hamburger)</li>
+  <li>Product hero modules: full-bleed maintained at all sizes, text scales down</li>
+  <li>Section backgrounds: maintain full-width color blocks at all breakpoints — the cinematic rhythm never breaks</li>
+  <li>Image sizing: products scale proportionally, never crop — the product silhouette is sacred</li>
+</ul>
+
+<h3 id="image-behavior">Image Behavior</h3>
+<ul>
+  <li>Product photography maintains aspect ratio at all breakpoints</li>
+  <li>Hero product images scale down but stay centered</li>
+  <li>Full-bleed section backgrounds persist at every size</li>
+  <li>Lifestyle images may crop on mobile but maintain their rounded corners</li>
+  <li>Lazy loading for below-fold product images</li>
+</ul>
+
+<h2 id="9-agent-prompt-guide">9. Agent Prompt Guide</h2>
+
+<h3 id="quick-color-reference">Quick Color Reference</h3>
+<ul>
+  <li>Primary CTA: Apple Blue (<code class="language-plaintext highlighter-rouge">#0071e3</code>)</li>
+  <li>Page background (light): <code class="language-plaintext highlighter-rouge">#f5f5f7</code></li>
+  <li>Page background (dark): <code class="language-plaintext highlighter-rouge">#000000</code></li>
+  <li>Heading text (light): <code class="language-plaintext highlighter-rouge">#1d1d1f</code></li>
+  <li>Heading text (dark): <code class="language-plaintext highlighter-rouge">#ffffff</code></li>
+  <li>Body text: <code class="language-plaintext highlighter-rouge">rgba(0, 0, 0, 0.8)</code> on light, <code class="language-plaintext highlighter-rouge">#ffffff</code> on dark</li>
+  <li>Link (light bg): <code class="language-plaintext highlighter-rouge">#0066cc</code></li>
+  <li>Link (dark bg): <code class="language-plaintext highlighter-rouge">#2997ff</code></li>
+  <li>Focus ring: <code class="language-plaintext highlighter-rouge">#0071e3</code></li>
+  <li>Card shadow: <code class="language-plaintext highlighter-rouge">rgba(0, 0, 0, 0.22) 3px 5px 30px 0px</code></li>
+</ul>
+
+<h3 id="example-component-prompts">Example Component Prompts</h3>
+<ul>
+  <li>“Create a hero section on black background. Headline at 56px SF Pro Display weight 600, line-height 1.07, letter-spacing -0.28px, color white. One-line subtitle at 21px SF Pro Display weight 400, line-height 1.19, color white. Two pill CTAs: ‘Learn more’ (transparent bg, white text, 1px solid white border, 980px radius) and ‘Buy’ (Apple Blue #0071e3 bg, white text, 8px radius, 8px 15px padding).”</li>
+  <li>“Design a product card: #f5f5f7 background, 8px border-radius, no border, no shadow. Product image top 60% of card on solid background. Title at 28px SF Pro Display weight 400, letter-spacing 0.196px, line-height 1.14. Description at 14px SF Pro Text weight 400, color rgba(0,0,0,0.8). ‘Learn more’ and ‘Shop’ links in #0066cc at 14px.”</li>
+  <li>“Build the Apple navigation: sticky, 48px height, background rgba(0,0,0,0.8) with backdrop-filter: saturate(180%) blur(20px). Links at 12px SF Pro Text weight 400, white text. Apple logo left, links centered, search and bag icons right.”</li>
+  <li>“Create an alternating section layout: first section black bg with white text and centered product image, second section #f5f5f7 bg with #1d1d1f text. Each section near full-viewport height with 56px headline and two pill CTAs below.”</li>
+  <li>“Design a ‘Learn more’ link: text #0066cc on light bg or #2997ff on dark bg, 14px SF Pro Text, underline on hover. After the text, include a right-arrow chevron character (&gt;). Wrap in a container with 980px border-radius for pill shape when used as a standalone CTA.”</li>
+</ul>
+
+<h3 id="iteration-guide">Iteration Guide</h3>
+<ol>
+  <li>Every interactive element gets Apple Blue (<code class="language-plaintext highlighter-rouge">#0071e3</code>) — no other accent colors</li>
+  <li>Section backgrounds alternate: black for immersive moments, <code class="language-plaintext highlighter-rouge">#f5f5f7</code> for informational moments</li>
+  <li>Typography optical sizing: SF Pro Display at 20px+, SF Pro Text below — never mix</li>
+  <li>Negative letter-spacing at all sizes: -0.28px at 56px, -0.374px at 17px, -0.224px at 14px, -0.12px at 12px</li>
+  <li>The navigation glass effect (translucent dark + blur) is non-negotiable — it defines the Apple web experience</li>
+  <li>Products always appear on solid color fields — never on gradients, textures, or lifestyle backgrounds in hero modules</li>
+  <li>Shadow is rare and always soft: <code class="language-plaintext highlighter-rouge">3px 5px 30px 0.22 opacity</code> or nothing at all</li>
+  <li>Pill CTAs use 980px radius — this creates the signature Apple rounded-rectangle-that-looks-like-a-capsule shape</li>
+</ol>
+
+    </main>
+
+    <footer class="bg-secondary-900 text-secondary-300">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="py-12 md:py-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                <!-- Company Info -->
+                <div>
+                    <div class="mb-4">
+                        <img src="/assets/images/octostack-white.png" alt="Octostack Logo" class="h-12 w-auto">
+                    </div>
+                    <p class="text-sm mb-4">Digital Identity & Healthcare Infrastructure Specialists</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.linkedin.com/in/liang-shi-berlin/" target="_blank" rel="noopener noreferrer" class="hover:text-primary-400 transition-colors" aria-label="LinkedIn">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://twitter.com/octostack" target="_blank" rel="noopener noreferrer" class="hover:text-primary-400 transition-colors" aria-label="Twitter">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://github.com/octostack-de/" target="_blank" rel="noopener noreferrer" class="hover:text-primary-400 transition-colors" aria-label="GitHub">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="font-semibold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-sm hover:text-primary-400 transition-colors">Home</a></li>
+                        <li><a href="#services" class="text-sm hover:text-primary-400 transition-colors">Services</a></li>
+                        <li><a href="#about" class="text-sm hover:text-primary-400 transition-colors">About</a></li>
+                        <li><a href="#contact" class="text-sm hover:text-primary-400 transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="font-semibold text-white mb-4">Contact</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>
+                            <a href="mailto:hello@octostack.de" class="flex items-center space-x-2 hover:text-primary-400 transition-colors">
+                                <i data-lucide="mail" class="w-4 h-4"></i>
+                                <span>hello@octostack.de</span>
+                            </a>
+                        </li>
+                        <li>Berlin, Germany</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="mt-12 pt-8 border-t border-secondary-800 text-center text-sm">
+                <p>&copy; <span id="current-year"></span> Octostack. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
