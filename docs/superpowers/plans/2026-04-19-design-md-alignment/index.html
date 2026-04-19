@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DESIGN.md Alignment Implementation Plan | Octostack</title>
+    <meta name="description" content="Specialized infrastructure, SRE, and software development for digital identity systems, EUDI Wallet implementations, and gematik-compliant digital health solutions.">
+    <meta name="keywords" content="digital identity, EUDI Wallet, eIDAS, digital health, gematik, Telematikinfrastruktur, identity infrastructure, healthcare IT, SRE, DevOps, cloud infrastructure">
+
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/InterVariable.woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/main.css">
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="flex flex-col min-h-screen">
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-black/5">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20 md:h-24">
+            <!-- Logo -->
+            <a href="/" class="flex items-center space-x-3">
+                <img src="/assets/images/octostack-white.png" alt="Octostack Logo" class="h-12 md:h-16 w-auto">
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#home" class="nav-link text-sm font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
+                    Home
+                </a>
+                <a href="#services" class="nav-link text-sm font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
+                    Services
+                </a>
+                <a href="#about" class="nav-link text-sm font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
+                    About
+                </a>
+                <a href="#contact" class="nav-link text-sm font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
+                    Contact
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-ink-700 hover:text-ink-800" aria-label="Toggle menu">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <nav id="mobile-menu" class="hidden md:hidden py-4 border-t border-black/5">
+            <a href="#home" class="nav-link block py-3 text-base font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
+                Home
+            </a>
+            <a href="#services" class="nav-link block py-3 text-base font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
+                Services
+            </a>
+            <a href="#about" class="nav-link block py-3 text-base font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
+                About
+            </a>
+            <a href="#contact" class="nav-link block py-3 text-base font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
+                Contact
+            </a>
+        </nav>
+    </div>
+</header>
+
+
+    <main class="flex-grow">
+        <h1 id="designmd-alignment-implementation-plan">DESIGN.md Alignment Implementation Plan</h1>
+
+<blockquote>
+  <p><strong>For agentic workers:</strong> REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (<code class="language-plaintext highlighter-rouge">- [ ]</code>) syntax for tracking.</p>
+</blockquote>
+
+<p><strong>Goal:</strong> Bring the Octostack marketing site’s visual system in line with <code class="language-plaintext highlighter-rouge">DESIGN.md</code> — tight typography, monochrome rhythm with three dark anchors, restrained chrome, pill CTAs — while preserving the Octostack ocean-blue brand accent (<code class="language-plaintext highlighter-rouge">#3b7ea1</code>).</p>
+
+<p><strong>Architecture:</strong> Styling-only refactor. Tailwind tokens (<code class="language-plaintext highlighter-rouge">primary</code>/<code class="language-plaintext highlighter-rouge">secondary</code>/<code class="language-plaintext highlighter-rouge">accent</code>) are replaced by <code class="language-plaintext highlighter-rouge">ink</code>/<code class="language-plaintext highlighter-rouge">paper</code>/<code class="language-plaintext highlighter-rouge">brand</code>/<code class="language-plaintext highlighter-rouge">darksurf</code>. Inter variable is self-hosted (DSGVO-safe). Section backgrounds remap to the cinematic rhythm from the spec. <code class="language-plaintext highlighter-rouge">index.html</code>, <code class="language-plaintext highlighter-rouge">_includes/*.html</code>, <code class="language-plaintext highlighter-rouge">_layouts/default.html</code>, <code class="language-plaintext highlighter-rouge">assets/js/main.js</code>, <code class="language-plaintext highlighter-rouge">tailwind.config.js</code>, <code class="language-plaintext highlighter-rouge">src/css/input.css</code> are the only files touched. No content/copy/structure changes.</p>
+
+<p><strong>Tech Stack:</strong> Jekyll 3.10 (via <code class="language-plaintext highlighter-rouge">github-pages</code> gem), Tailwind CSS (standalone CLI), Lucide Icons via CDN, self-hosted Inter variable font.</p>
+
+<p><strong>Testing note:</strong> this is a static marketing site with no test framework. “Verification” per task = <code class="language-plaintext highlighter-rouge">npm run build</code> exits 0, plus targeted <code class="language-plaintext highlighter-rouge">grep</code> commands (defined per task) and browser visual check against <code class="language-plaintext highlighter-rouge">DESIGN.md</code>. No pytest/jest exists.</p>
+
+<p><strong>Spec:</strong> <code class="language-plaintext highlighter-rouge">docs/superpowers/specs/2026-04-19-design-md-alignment-design.md</code></p>
+
+<p><strong>Branch:</strong> <code class="language-plaintext highlighter-rouge">style/design-md-alignment</code> (already checked out)</p>
+
+<hr />
+
+<h2 id="task-sequencing-rationale">Task Sequencing Rationale</h2>
+
+<p>Tokens must exist before components can reference them; components must exist before sections use them. So:</p>
+
+<ol>
+  <li>Font asset + global CSS (Task 1)</li>
+  <li>Tailwind tokens (Task 2)</li>
+  <li>Layout preload (Task 3)</li>
+  <li>Shared includes — header, footer, service-card (Tasks 4–6)</li>
+  <li>JS token swap (Task 7)</li>
+  <li><code class="language-plaintext highlighter-rouge">index.html</code> section-by-section following the rhythm map (Tasks 8–15)</li>
+  <li>Final full-build verification + PR prep (Task 16)</li>
+</ol>
+
+<p>Each task ends with a commit. This keeps the diff reviewable and lets us bisect if a later task visually regresses an earlier one.</p>
+
+<hr />
+
+<h2 id="task-1-self-host-inter-variable-font--global-css">Task 1: Self-host Inter variable font + global CSS</h2>
+
+<p><strong>Goal:</strong> Get the Inter variable font file on disk, wire it up via <code class="language-plaintext highlighter-rouge">@font-face</code>, add the global tight-tracking rule, and remove the old <code class="language-plaintext highlighter-rouge">.text-gradient</code> utility.</p>
+
+<p><strong>Files:</strong></p>
+<ul class="task-list">
+  <li>Create: <code class="language-plaintext highlighter-rouge">assets/fonts/InterVariable.woff2</code></li>
+  <li>
+    <p>Modify: <code class="language-plaintext highlighter-rouge">src/css/input.css</code> (entire file)</p>
+  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 1: Download Inter variable woff2</strong></li>
+</ul>
+
+<p>Run:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> assets/fonts
+curl <span class="nt">-L</span> <span class="nt">-o</span> assets/fonts/InterVariable.woff2 <span class="se">\</span>
+  https://rsms.me/inter/font-files/InterVariable.woff2
+<span class="nb">ls</span> <span class="nt">-lh</span> assets/fonts/InterVariable.woff2
+</code></pre></div></div>
+
+<p>Expected: a single file, roughly 300–360KB. If the download fails or is under 100KB, stop and report — do not commit a broken asset.</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 2: Rewrite <code class="language-plaintext highlighter-rouge">src/css/input.css</code></strong></li>
+</ul>
+
+<p>Replace the full contents of <code class="language-plaintext highlighter-rouge">src/css/input.css</code> with:</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@tailwind</span> <span class="n">base</span><span class="p">;</span>
+<span class="k">@tailwind</span> <span class="n">components</span><span class="p">;</span>
+<span class="k">@tailwind</span> <span class="n">utilities</span><span class="p">;</span>
+
+<span class="k">@font-face</span> <span class="p">{</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="s2">'Inter'</span><span class="p">;</span>
+  <span class="nl">font-style</span><span class="p">:</span> <span class="nb">normal</span><span class="p">;</span>
+  <span class="nl">font-weight</span><span class="p">:</span> <span class="m">100</span> <span class="m">900</span><span class="p">;</span>
+  <span class="py">font-display</span><span class="p">:</span> <span class="n">swap</span><span class="p">;</span>
+  <span class="nl">src</span><span class="p">:</span> <span class="sx">url('/assets/fonts/InterVariable.woff2')</span> <span class="n">format</span><span class="p">(</span><span class="s2">'woff2-variations'</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">@layer</span> <span class="n">base</span> <span class="p">{</span>
+  <span class="nt">body</span> <span class="p">{</span>
+    <span class="nl">letter-spacing</span><span class="p">:</span> <span class="m">-0.01em</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Note: the <code class="language-plaintext highlighter-rouge">.text-gradient</code> utility is removed. No Tailwind <code class="language-plaintext highlighter-rouge">@apply</code> directives remain in this file.</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 3: Verify the build still compiles</strong></li>
+</ul>
+
+<p>Run:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm run build:css
+</code></pre></div></div>
+
+<p>Expected: exits 0. <code class="language-plaintext highlighter-rouge">assets/css/main.css</code> regenerated.</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 4: Verify <code class="language-plaintext highlighter-rouge">.text-gradient</code> no longer exists in the compiled CSS</strong></li>
+</ul>
+
+<p>Run:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">-c</span> <span class="s1">'text-gradient'</span> assets/css/main.css <span class="o">||</span> <span class="nb">echo</span> <span class="s2">"0 matches"</span>
+</code></pre></div></div>
+
+<p>Expected: <code class="language-plaintext highlighter-rouge">0 matches</code> (since the utility is gone and no HTML references it yet).</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 5: Commit</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add assets/fonts/InterVariable.woff2 src/css/input.css
+git commit <span class="nt">-m</span> <span class="s2">"style: self-host Inter font, add tight-tracking rule, drop text-gradient utility"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="task-2-rewrite-tailwind-token-config">Task 2: Rewrite Tailwind token config</h2>
+
+<p><strong>Goal:</strong> Replace the <code class="language-plaintext highlighter-rouge">primary</code>/<code class="language-plaintext highlighter-rouge">secondary</code>/<code class="language-plaintext highlighter-rouge">accent</code> color scales with <code class="language-plaintext highlighter-rouge">ink</code>/<code class="language-plaintext highlighter-rouge">paper</code>/<code class="language-plaintext highlighter-rouge">brand</code>/<code class="language-plaintext highlighter-rouge">darksurf</code>; wire Inter into <code class="language-plaintext highlighter-rouge">fontFamily.sans</code>; add the <code class="language-plaintext highlighter-rouge">shadow-card</code> extension.</p>
+
+<p><strong>Files:</strong></p>
+<ul class="task-list">
+  <li>
+    <p>Modify: <code class="language-plaintext highlighter-rouge">tailwind.config.js</code> (entire file)</p>
+  </li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 1: Replace <code class="language-plaintext highlighter-rouge">tailwind.config.js</code> with the new token set</strong></p>
+  </li>
+</ul>
+
+<p>Overwrite the file with:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">content</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">'</span><span class="s1">./_includes/**/*.html</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">./_layouts/**/*.html</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">./_posts/*.md</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">./*.html</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">],</span>
+  <span class="na">theme</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">extend</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">colors</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">ink</span><span class="p">:</span> <span class="p">{</span>
+          <span class="mi">900</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#000000</span><span class="dl">'</span><span class="p">,</span>
+          <span class="mi">800</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#1d1d1f</span><span class="dl">'</span><span class="p">,</span>
+          <span class="mi">700</span><span class="p">:</span> <span class="dl">'</span><span class="s1">rgba(0, 0, 0, 0.8)</span><span class="dl">'</span><span class="p">,</span>
+          <span class="mi">600</span><span class="p">:</span> <span class="dl">'</span><span class="s1">rgba(0, 0, 0, 0.48)</span><span class="dl">'</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="na">paper</span><span class="p">:</span> <span class="p">{</span>
+          <span class="mi">50</span><span class="p">:</span>  <span class="dl">'</span><span class="s1">#ffffff</span><span class="dl">'</span><span class="p">,</span>
+          <span class="mi">100</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#f5f5f7</span><span class="dl">'</span><span class="p">,</span>
+          <span class="mi">200</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#ededf2</span><span class="dl">'</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="na">darksurf</span><span class="p">:</span> <span class="p">{</span>
+          <span class="mi">1</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#272729</span><span class="dl">'</span><span class="p">,</span>
+          <span class="mi">2</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#262628</span><span class="dl">'</span><span class="p">,</span>
+          <span class="mi">3</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#28282a</span><span class="dl">'</span><span class="p">,</span>
+        <span class="p">},</span>
+        <span class="na">brand</span><span class="p">:</span> <span class="p">{</span>
+          <span class="mi">500</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#3b7ea1</span><span class="dl">'</span><span class="p">,</span>
+          <span class="mi">600</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#2e6580</span><span class="dl">'</span><span class="p">,</span>
+          <span class="mi">700</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#244d61</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">link</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#2e6580</span><span class="dl">'</span><span class="p">,</span>
+          <span class="na">darklink</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#4aa9c8</span><span class="dl">'</span><span class="p">,</span>
+        <span class="p">},</span>
+      <span class="p">},</span>
+      <span class="na">fontFamily</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">sans</span><span class="p">:</span> <span class="p">[</span>
+          <span class="dl">'</span><span class="s1">Inter</span><span class="dl">'</span><span class="p">,</span>
+          <span class="dl">'</span><span class="s1">-apple-system</span><span class="dl">'</span><span class="p">,</span>
+          <span class="dl">'</span><span class="s1">BlinkMacSystemFont</span><span class="dl">'</span><span class="p">,</span>
+          <span class="dl">'</span><span class="s1">"Segoe UI"</span><span class="dl">'</span><span class="p">,</span>
+          <span class="dl">'</span><span class="s1">Roboto</span><span class="dl">'</span><span class="p">,</span>
+          <span class="dl">'</span><span class="s1">Helvetica</span><span class="dl">'</span><span class="p">,</span>
+          <span class="dl">'</span><span class="s1">Arial</span><span class="dl">'</span><span class="p">,</span>
+          <span class="dl">'</span><span class="s1">sans-serif</span><span class="dl">'</span><span class="p">,</span>
+        <span class="p">],</span>
+      <span class="p">},</span>
+      <span class="na">boxShadow</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">card</span><span class="p">:</span> <span class="dl">'</span><span class="s1">0 5px 30px rgba(0,0,0,0.12)</span><span class="dl">'</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="na">plugins</span><span class="p">:</span> <span class="p">[],</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 2: Rebuild CSS and confirm no config errors</strong></li>
+</ul>
+
+<p>Run:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm run build:css
+</code></pre></div></div>
+
+<p>Expected: exits 0. If Tailwind errors about unknown classes in the content files, that’s fine at this stage — we’ll be rewriting those HTML files next. A syntax error in <code class="language-plaintext highlighter-rouge">tailwind.config.js</code> itself would block the build; investigate and fix.</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 3: Verify the deleted scales are not referenced in the compiled CSS payload from the config itself</strong></li>
+</ul>
+
+<p>The HTML still references <code class="language-plaintext highlighter-rouge">primary-*</code>/<code class="language-plaintext highlighter-rouge">secondary-*</code>/<code class="language-plaintext highlighter-rouge">accent-*</code> classes at this point — they will simply not compile into <code class="language-plaintext highlighter-rouge">main.css</code> because those tokens no longer exist. The next tasks remove the references from HTML. Proceed.</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 4: Commit</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add tailwind.config.js
+git commit <span class="nt">-m</span> <span class="s2">"style: replace primary/secondary/accent scales with ink/paper/brand/darksurf tokens"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="task-3-add-font-preload-hint-in-default-layout">Task 3: Add font preload hint in default layout</h2>
+
+<p><strong>Goal:</strong> Preload Inter so first paint picks it up without FOIT.</p>
+
+<p><strong>Files:</strong></p>
+<ul class="task-list">
+  <li>
+    <p>Modify: <code class="language-plaintext highlighter-rouge">_layouts/default.html</code></p>
+  </li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 1: Add the preload tag</strong></p>
+  </li>
+</ul>
+
+<p>In <code class="language-plaintext highlighter-rouge">_layouts/default.html</code>, find this line (currently line 10):</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/assets/css/main.css"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p>Insert a preload tag immediately BEFORE it so the result is:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"preload"</span> <span class="na">as=</span><span class="s">"font"</span> <span class="na">type=</span><span class="s">"font/woff2"</span> <span class="na">href=</span><span class="s">"/assets/fonts/InterVariable.woff2"</span> <span class="na">crossorigin</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/assets/css/main.css"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 2: Commit</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add _layouts/default.html
+git commit <span class="nt">-m</span> <span class="s2">"style: preload Inter variable font"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="task-4-rewrite-header-to-light-glass-nav">Task 4: Rewrite header to light glass nav</h2>
+
+<p><strong>Goal:</strong> Replace the current <code class="language-plaintext highlighter-rouge">bg-white/95 backdrop-blur-sm shadow-sm</code> header with the spec’s light-glass nav. Remap all <code class="language-plaintext highlighter-rouge">secondary-*</code>/<code class="language-plaintext highlighter-rouge">primary-*</code> classes to <code class="language-plaintext highlighter-rouge">ink-*</code>/<code class="language-plaintext highlighter-rouge">brand-*</code>. Height unchanged.</p>
+
+<p><strong>Files:</strong></p>
+<ul class="task-list">
+  <li>
+    <p>Modify: <code class="language-plaintext highlighter-rouge">_includes/header.html</code> (entire file)</p>
+  </li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 1: Replace <code class="language-plaintext highlighter-rouge">_includes/header.html</code></strong></p>
+  </li>
+</ul>
+
+<p>Overwrite with:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">"sticky top-0 z-50 bg-white/80 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-black/5"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container mx-auto px-4 sm:px-6 lg:px-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex items-center justify-between h-20 md:h-24"</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- Logo --&gt;</span>
+            <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"/"</span> <span class="na">class=</span><span class="s">"flex items-center space-x-3"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/assets/images/octostack-white.png"</span> <span class="na">alt=</span><span class="s">"Octostack Logo"</span> <span class="na">class=</span><span class="s">"h-12 md:h-16 w-auto"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;/a&gt;</span>
+
+            <span class="c">&lt;!-- Desktop Navigation --&gt;</span>
+            <span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"hidden md:flex items-center space-x-8"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#home"</span> <span class="na">class=</span><span class="s">"nav-link text-sm font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800"</span><span class="nt">&gt;</span>
+                    Home
+                <span class="nt">&lt;/a&gt;</span>
+                <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#services"</span> <span class="na">class=</span><span class="s">"nav-link text-sm font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800"</span><span class="nt">&gt;</span>
+                    Services
+                <span class="nt">&lt;/a&gt;</span>
+                <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#about"</span> <span class="na">class=</span><span class="s">"nav-link text-sm font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800"</span><span class="nt">&gt;</span>
+                    About
+                <span class="nt">&lt;/a&gt;</span>
+                <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#contact"</span> <span class="na">class=</span><span class="s">"nav-link text-sm font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800"</span><span class="nt">&gt;</span>
+                    Contact
+                <span class="nt">&lt;/a&gt;</span>
+            <span class="nt">&lt;/nav&gt;</span>
+
+            <span class="c">&lt;!-- Mobile Menu Button --&gt;</span>
+            <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"mobile-menu-btn"</span> <span class="na">class=</span><span class="s">"md:hidden p-2 text-ink-700 hover:text-ink-800"</span> <span class="na">aria-label=</span><span class="s">"Toggle menu"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"menu"</span> <span class="na">class=</span><span class="s">"w-6 h-6"</span><span class="nt">&gt;&lt;/i&gt;</span>
+            <span class="nt">&lt;/button&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+
+        <span class="c">&lt;!-- Mobile Navigation --&gt;</span>
+        <span class="nt">&lt;nav</span> <span class="na">id=</span><span class="s">"mobile-menu"</span> <span class="na">class=</span><span class="s">"hidden md:hidden py-4 border-t border-black/5"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#home"</span> <span class="na">class=</span><span class="s">"nav-link block py-3 text-base font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800"</span><span class="nt">&gt;</span>
+                Home
+            <span class="nt">&lt;/a&gt;</span>
+            <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#services"</span> <span class="na">class=</span><span class="s">"nav-link block py-3 text-base font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800"</span><span class="nt">&gt;</span>
+                Services
+            <span class="nt">&lt;/a&gt;</span>
+            <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#about"</span> <span class="na">class=</span><span class="s">"nav-link block py-3 text-base font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800"</span><span class="nt">&gt;</span>
+                About
+            <span class="nt">&lt;/a&gt;</span>
+            <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#contact"</span> <span class="na">class=</span><span class="s">"nav-link block py-3 text-base font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800"</span><span class="nt">&gt;</span>
+                Contact
+            <span class="nt">&lt;/a&gt;</span>
+        <span class="nt">&lt;/nav&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/header&gt;</span>
+</code></pre></div></div>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 2: Verify no old tokens remain in the file</strong></li>
+</ul>
+
+<p>Run:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">-E</span> <span class="s1">'primary-|secondary-|accent-'</span> _includes/header.html <span class="o">||</span> <span class="nb">echo</span> <span class="s2">"clean"</span>
+</code></pre></div></div>
+
+<p>Expected: <code class="language-plaintext highlighter-rouge">clean</code>.</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 3: Commit</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add _includes/header.html
+git commit <span class="nt">-m</span> <span class="s2">"style: rewrite header to light glass nav per DESIGN.md"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="task-5-rewrite-footer-dark-anchor--twitter-removal">Task 5: Rewrite footer (dark anchor + Twitter removal)</h2>
+
+<p><strong>Goal:</strong> Footer becomes the natural third dark anchor. Twitter icon and its <code class="language-plaintext highlighter-rouge">&lt;a&gt;</code> are removed per the spec. All color tokens remapped.</p>
+
+<p><strong>Files:</strong></p>
+<ul class="task-list">
+  <li>
+    <p>Modify: <code class="language-plaintext highlighter-rouge">_includes/footer.html</code> (entire file)</p>
+  </li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 1: Replace <code class="language-plaintext highlighter-rouge">_includes/footer.html</code></strong></p>
+  </li>
+</ul>
+
+<p>Overwrite with:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;footer</span> <span class="na">class=</span><span class="s">"bg-ink-800 text-white/70"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container mx-auto px-4 sm:px-6 lg:px-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"py-12 md:py-16"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12"</span><span class="nt">&gt;</span>
+                <span class="c">&lt;!-- Company Info --&gt;</span>
+                <span class="nt">&lt;div&gt;</span>
+                    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"mb-4"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/assets/images/octostack-white.png"</span> <span class="na">alt=</span><span class="s">"Octostack Logo"</span> <span class="na">class=</span><span class="s">"h-12 w-auto"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                    <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-sm mb-4"</span><span class="nt">&gt;</span>Digital Identity <span class="err">&amp;</span> Healthcare Infrastructure Specialists<span class="nt">&lt;/p&gt;</span>
+                    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex space-x-4"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://www.linkedin.com/in/liang-shi-berlin/"</span> <span class="na">target=</span><span class="s">"_blank"</span> <span class="na">rel=</span><span class="s">"noopener noreferrer"</span> <span class="na">class=</span><span class="s">"hover:text-white transition-colors"</span> <span class="na">aria-label=</span><span class="s">"LinkedIn"</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"linkedin"</span> <span class="na">class=</span><span class="s">"w-5 h-5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                        <span class="nt">&lt;/a&gt;</span>
+                        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/octostack-de/"</span> <span class="na">target=</span><span class="s">"_blank"</span> <span class="na">rel=</span><span class="s">"noopener noreferrer"</span> <span class="na">class=</span><span class="s">"hover:text-white transition-colors"</span> <span class="na">aria-label=</span><span class="s">"GitHub"</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"github"</span> <span class="na">class=</span><span class="s">"w-5 h-5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                        <span class="nt">&lt;/a&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                <span class="nt">&lt;/div&gt;</span>
+
+                <span class="c">&lt;!-- Quick Links --&gt;</span>
+                <span class="nt">&lt;div&gt;</span>
+                    <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"font-semibold text-white mb-4"</span><span class="nt">&gt;</span>Quick Links<span class="nt">&lt;/h3&gt;</span>
+                    <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"space-y-2"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#home"</span> <span class="na">class=</span><span class="s">"text-sm hover:text-white transition-colors"</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+                        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#services"</span> <span class="na">class=</span><span class="s">"text-sm hover:text-white transition-colors"</span><span class="nt">&gt;</span>Services<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+                        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#about"</span> <span class="na">class=</span><span class="s">"text-sm hover:text-white transition-colors"</span><span class="nt">&gt;</span>About<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+                        <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"#contact"</span> <span class="na">class=</span><span class="s">"text-sm hover:text-white transition-colors"</span><span class="nt">&gt;</span>Contact<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+                    <span class="nt">&lt;/ul&gt;</span>
+                <span class="nt">&lt;/div&gt;</span>
+
+                <span class="c">&lt;!-- Contact Info --&gt;</span>
+                <span class="nt">&lt;div&gt;</span>
+                    <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"font-semibold text-white mb-4"</span><span class="nt">&gt;</span>Contact<span class="nt">&lt;/h3&gt;</span>
+                    <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"space-y-2 text-sm"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;li&gt;</span>
+                            <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"mailto:hello@octostack.de"</span> <span class="na">class=</span><span class="s">"flex items-center space-x-2 hover:text-white transition-colors"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"mail"</span> <span class="na">class=</span><span class="s">"w-4 h-4"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                                <span class="nt">&lt;span&gt;</span>hello@octostack.de<span class="nt">&lt;/span&gt;</span>
+                            <span class="nt">&lt;/a&gt;</span>
+                        <span class="nt">&lt;/li&gt;</span>
+                        <span class="nt">&lt;li&gt;</span>Berlin, Germany<span class="nt">&lt;/li&gt;</span>
+                    <span class="nt">&lt;/ul&gt;</span>
+                <span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+
+            <span class="c">&lt;!-- Copyright --&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"mt-12 pt-8 border-t border-white/10 text-center text-sm"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;p&gt;</span><span class="ni">&amp;copy;</span> <span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">"current-year"</span><span class="nt">&gt;&lt;/span&gt;</span> Octostack. All rights reserved.<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/footer&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">current-year</span><span class="dl">'</span><span class="p">).</span><span class="nx">textContent</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getFullYear</span><span class="p">();</span>
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 2: Verify cleanup</strong></li>
+</ul>
+
+<p>Run:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">-E</span> <span class="s1">'primary-|secondary-|accent-|twitter'</span> _includes/footer.html <span class="o">||</span> <span class="nb">echo</span> <span class="s2">"clean"</span>
+</code></pre></div></div>
+
+<p>Expected: <code class="language-plaintext highlighter-rouge">clean</code>.</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 3: Commit</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add _includes/footer.html
+git commit <span class="nt">-m</span> <span class="s2">"style: dark-anchor footer, remove Twitter link, remap tokens"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="task-6-rewrite-service-card-include">Task 6: Rewrite service-card include</h2>
+
+<p><strong>Goal:</strong> Static card (no hover lift, no hover glow). Light section variant by default. Uses new icon chip, card shadow, and brand tokens.</p>
+
+<p><strong>Files:</strong></p>
+<ul class="task-list">
+  <li>
+    <p>Modify: <code class="language-plaintext highlighter-rouge">_includes/service-card.html</code> (entire file)</p>
+  </li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 1: Replace <code class="language-plaintext highlighter-rouge">_includes/service-card.html</code></strong></p>
+  </li>
+</ul>
+
+<p>Overwrite with:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bg-paper-100 rounded-md p-8 shadow-card"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex items-start space-x-4"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-shrink-0"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">""</span> <span class="na">class=</span><span class="s">"w-6 h-6 text-brand-500"</span><span class="nt">&gt;&lt;/i&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-1"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"text-xl font-semibold leading-[1.19] mb-2 text-ink-800"</span><span class="nt">&gt;&lt;/h3&gt;</span>
+            <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-ink-700 mb-4"</span><span class="nt">&gt;&lt;/p&gt;</span>
+            <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"space-y-1.5"</span><span class="nt">&gt;</span>
+                
+            <span class="nt">&lt;/ul&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p>Note on card background strategy: the default here is <code class="language-plaintext highlighter-rouge">bg-paper-100</code>. Sections with <code class="language-plaintext highlighter-rouge">bg-paper-100</code> themselves need contrast — those are handled in the section tasks by wrapping the include in an extra container that overrides the card bg, OR by inlining the card markup in those sections. The spec (§Service card on light-gray section) says “swap card bg <code class="language-plaintext highlighter-rouge">bg-paper-100</code> → <code class="language-plaintext highlighter-rouge">bg-white</code>”. In practice this means: in Task 10 (Development &amp; Ops, <code class="language-plaintext highlighter-rouge">bg-paper-100</code>) and Task 12 (Architecture advisory, <code class="language-plaintext highlighter-rouge">bg-ink-900</code>) we inline a per-section card variant rather than using this include. The include stays as the “default light / white-section” variant used by Tasks 9 and 11.</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 2: Verify cleanup</strong></li>
+</ul>
+
+<p>Run:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">-E</span> <span class="s1">'primary-|secondary-|accent-|hover:-translate|shadow-xl'</span> _includes/service-card.html <span class="o">||</span> <span class="nb">echo</span> <span class="s2">"clean"</span>
+</code></pre></div></div>
+
+<p>Expected: <code class="language-plaintext highlighter-rouge">clean</code>.</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 3: Commit</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add _includes/service-card.html
+git commit <span class="nt">-m</span> <span class="s2">"style: static service-card on paper-100 with brand-tinted icon chip"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="task-7-swap-nav-link-active-classes-in-mainjs">Task 7: Swap nav-link active classes in main.js</h2>
+
+<p><strong>Goal:</strong> Replace the deleted <code class="language-plaintext highlighter-rouge">text-primary-600</code>/<code class="language-plaintext highlighter-rouge">text-secondary-600</code> tokens in the active-section highlighting logic with <code class="language-plaintext highlighter-rouge">text-ink-800</code> (active) / <code class="language-plaintext highlighter-rouge">text-ink-700</code> (default).</p>
+
+<p><strong>Files:</strong></p>
+<ul class="task-list">
+  <li>
+    <p>Modify: <code class="language-plaintext highlighter-rouge">assets/js/main.js</code> (lines 46–50)</p>
+  </li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 1: Edit main.js</strong></p>
+  </li>
+</ul>
+
+<p>In <code class="language-plaintext highlighter-rouge">assets/js/main.js</code>, locate the <code class="language-plaintext highlighter-rouge">updateActiveSection</code> function body (currently lines 40–55). Replace the four lines that reference the old tokens so the block becomes:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="nx">sections</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">sectionId</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="kd">const</span> <span class="nx">section</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="nx">sectionId</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">section</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">const</span> <span class="p">{</span> <span class="nx">offsetTop</span><span class="p">,</span> <span class="nx">offsetHeight</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">section</span><span class="p">;</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">scrollPosition</span> <span class="o">&gt;=</span> <span class="nx">offsetTop</span> <span class="o">&amp;&amp;</span> <span class="nx">scrollPosition</span> <span class="o">&lt;</span> <span class="nx">offsetTop</span> <span class="o">+</span> <span class="nx">offsetHeight</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">navLinks</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">link</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                        <span class="nx">link</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="dl">'</span><span class="s1">text-ink-800</span><span class="dl">'</span><span class="p">);</span>
+                        <span class="nx">link</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">text-ink-700</span><span class="dl">'</span><span class="p">);</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="nx">link</span><span class="p">.</span><span class="nx">getAttribute</span><span class="p">(</span><span class="dl">'</span><span class="s1">href</span><span class="dl">'</span><span class="p">)</span> <span class="o">===</span> <span class="s2">`#</span><span class="p">${</span><span class="nx">sectionId</span><span class="p">}</span><span class="s2">`</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">link</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="dl">'</span><span class="s1">text-ink-700</span><span class="dl">'</span><span class="p">);</span>
+                            <span class="nx">link</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="dl">'</span><span class="s1">text-ink-800</span><span class="dl">'</span><span class="p">);</span>
+                        <span class="p">}</span>
+                    <span class="p">});</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+</code></pre></div></div>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 2: Verify cleanup</strong></li>
+</ul>
+
+<p>Run:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">-E</span> <span class="s1">'primary-|secondary-|accent-'</span> assets/js/main.js <span class="o">||</span> <span class="nb">echo</span> <span class="s2">"clean"</span>
+</code></pre></div></div>
+
+<p>Expected: <code class="language-plaintext highlighter-rouge">clean</code>.</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 3: Commit</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add assets/js/main.js
+git commit <span class="nt">-m</span> <span class="s2">"style: active-nav class swap uses ink tokens"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="task-8-rewrite-hero-section-dark-anchor">Task 8: Rewrite hero section (dark anchor)</h2>
+
+<p><strong>Goal:</strong> Hero becomes <code class="language-plaintext highlighter-rouge">bg-ink-900</code>. Remove pastel gradient + two blur blobs + gradient-text headline + decorative icon pill. CTAs become new pill components. Headline solid white.</p>
+
+<p><strong>Files:</strong></p>
+<ul class="task-list">
+  <li>
+    <p>Modify: <code class="language-plaintext highlighter-rouge">index.html</code> (lines 5–43 — the <code class="language-plaintext highlighter-rouge">&lt;section id="home"&gt;</code> block)</p>
+  </li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 1: Replace the hero <code class="language-plaintext highlighter-rouge">&lt;section&gt;</code> block</strong></p>
+  </li>
+</ul>
+
+<p>In <code class="language-plaintext highlighter-rouge">index.html</code>, find and replace lines 5–43 (the hero block beginning with <code class="language-plaintext highlighter-rouge">&lt;!-- Hero Section --&gt;</code> through its closing <code class="language-plaintext highlighter-rouge">&lt;/section&gt;</code>) with:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Hero Section --&gt;</span>
+<span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"home"</span> <span class="na">class=</span><span class="s">"bg-ink-900 py-20 md:py-32"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container mx-auto px-4 sm:px-6 lg:px-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"max-w-4xl mx-auto text-center"</span><span class="nt">&gt;</span>
+            <span class="c">&lt;!-- Heading --&gt;</span>
+            <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"text-5xl md:text-6xl font-semibold leading-[1.07] tracking-[-0.02em] text-white mb-6"</span><span class="nt">&gt;</span>
+                Specialized in Digital Identity <span class="ni">&amp;amp;</span> Healthcare Infrastructure
+            <span class="nt">&lt;/h1&gt;</span>
+
+            <span class="c">&lt;!-- Subheading --&gt;</span>
+            <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-lg md:text-xl leading-[1.5] text-white/80 mb-10 max-w-2xl mx-auto"</span><span class="nt">&gt;</span>
+                Expert infrastructure, SRE, and software development for digital identity systems, EUDI Wallet implementations, and gematik-compliant digital health solutions.
+            <span class="nt">&lt;/p&gt;</span>
+
+            <span class="c">&lt;!-- CTAs --&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex flex-col sm:flex-row gap-4 justify-center"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#contact"</span> <span class="na">class=</span><span class="s">"inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-normal rounded-full text-white bg-brand-500 hover:bg-brand-600 transition-colors focus-visible:ring-2 focus-visible:ring-brand-500/40 focus-visible:outline-none"</span><span class="nt">&gt;</span>
+                    Get Started
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"arrow-right"</span> <span class="na">class=</span><span class="s">"w-5 h-5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                <span class="nt">&lt;/a&gt;</span>
+                <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"#services"</span> <span class="na">class=</span><span class="s">"inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-normal rounded-full text-brand-darklink border border-brand-darklink hover:bg-brand-darklink hover:text-ink-900 transition-colors focus-visible:ring-2 focus-visible:ring-brand-500/40 focus-visible:outline-none"</span><span class="nt">&gt;</span>
+                    Our Services
+                <span class="nt">&lt;/a&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/section&gt;</span>
+</code></pre></div></div>
+
+<p>Notes:</p>
+<ul class="task-list">
+  <li>The outline pill on the dark hero uses <code class="language-plaintext highlighter-rouge">brand-darklink</code> (<code class="language-plaintext highlighter-rouge">#4aa9c8</code>) instead of <code class="language-plaintext highlighter-rouge">brand-500</code> so it has enough luminance against black. Hover flips to filled light-cyan with dark text.</li>
+  <li>The “Icon” block (lines 15–18 in the original) is removed per spec §Hero icon pill (removed).</li>
+  <li>The two <code class="language-plaintext highlighter-rouge">.blur-3xl</code> decoration divs (original lines 8–11) are removed.</li>
+  <li>
+    <p>Copy is preserved verbatim from the original; only the <code class="language-plaintext highlighter-rouge">&lt;span class="text-gradient"&gt;…&lt;/span&gt;</code> wrapper is removed so “Digital Identity &amp; Healthcare” is no longer visually distinguished inside the headline.</p>
+  </li>
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 2: Commit</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add index.html
+git commit <span class="nt">-m</span> <span class="s2">"style: rewrite hero as dark-anchor with pill CTAs and no decoration"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="task-9-rewrite-services-overview-section-light-gray">Task 9: Rewrite services-overview section (light-gray)</h2>
+
+<p><strong>Goal:</strong> Section becomes <code class="language-plaintext highlighter-rouge">bg-paper-100</code>. Kill <code class="language-plaintext highlighter-rouge">text-gradient</code> on heading. Inline overview cards get the new static treatment with white background for contrast on the gray section.</p>
+
+<p><strong>Files:</strong></p>
+<ul class="task-list">
+  <li>
+    <p>Modify: <code class="language-plaintext highlighter-rouge">index.html</code> (lines 45–69 — the <code class="language-plaintext highlighter-rouge">&lt;section id="services"&gt;</code> block)</p>
+  </li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 1: Replace the services-overview <code class="language-plaintext highlighter-rouge">&lt;section&gt;</code> block</strong></p>
+  </li>
+</ul>
+
+<p>Find and replace lines 45–69 with:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Services Overview --&gt;</span>
+<span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"services"</span> <span class="na">class=</span><span class="s">"py-16 md:py-24 bg-paper-100"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container mx-auto px-4 sm:px-6 lg:px-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"text-center mb-12"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">"text-4xl md:text-5xl font-semibold leading-[1.1] text-ink-800 mb-4"</span><span class="nt">&gt;</span>
+                Our Specialized Services
+            <span class="nt">&lt;/h2&gt;</span>
+            <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-lg leading-[1.5] text-ink-700 max-w-2xl mx-auto"</span><span class="nt">&gt;</span>
+                End-to-end solutions for digital identity, EUDI Wallet, and digital health infrastructure
+            <span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"grid grid-cols-1 md:grid-cols-3 gap-8"</span><span class="nt">&gt;</span>
+            
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bg-white rounded-md p-8 shadow-card text-center"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"inline-flex items-center justify-center w-16 h-16 rounded-md bg-brand-500/10 mb-4"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"fingerprint"</span> <span class="na">class=</span><span class="s">"w-8 h-8 text-brand-500"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                <span class="nt">&lt;/div&gt;</span>
+                <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"text-xl font-semibold leading-[1.19] text-ink-800 mb-3"</span><span class="nt">&gt;</span>Digital Identity Solutions<span class="nt">&lt;/h3&gt;</span>
+                <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-ink-700"</span><span class="nt">&gt;</span>End-to-end infrastructure, SRE, and software development solutions for digital identity systems with focus on security, scalability, and compliance.<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+            
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bg-white rounded-md p-8 shadow-card text-center"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"inline-flex items-center justify-center w-16 h-16 rounded-md bg-brand-500/10 mb-4"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"wallet"</span> <span class="na">class=</span><span class="s">"w-8 h-8 text-brand-500"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                <span class="nt">&lt;/div&gt;</span>
+                <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"text-xl font-semibold leading-[1.19] text-ink-800 mb-3"</span><span class="nt">&gt;</span>EUDI Wallet Infrastructure<span class="nt">&lt;/h3&gt;</span>
+                <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-ink-700"</span><span class="nt">&gt;</span>Specialized infrastructure and architecture consulting for European Digital Identity (EUDI) Wallet implementations.<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+            
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bg-white rounded-md p-8 shadow-card text-center"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"inline-flex items-center justify-center w-16 h-16 rounded-md bg-brand-500/10 mb-4"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"heart-pulse"</span> <span class="na">class=</span><span class="s">"w-8 h-8 text-brand-500"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                <span class="nt">&lt;/div&gt;</span>
+                <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"text-xl font-semibold leading-[1.19] text-ink-800 mb-3"</span><span class="nt">&gt;</span>Digital Health Infrastructure (gematik)<span class="nt">&lt;/h3&gt;</span>
+                <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-ink-700"</span><span class="nt">&gt;</span>Infrastructure and architecture solutions for digital health projects following gematik specifications and German healthcare standards.<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+            
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/section&gt;</span>
+</code></pre></div></div>
+
+<p>Cards here use <code class="language-plaintext highlighter-rouge">bg-white</code> because the section is <code class="language-plaintext highlighter-rouge">bg-paper-100</code> (contrast flip per spec §Service card on light-gray section).</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 2: Commit</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add index.html
+git commit <span class="nt">-m</span> <span class="s2">"style: services overview on paper-100 with white cards"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="task-10-rewrite-specialized-infrastructure-detail-section-white">Task 10: Rewrite specialized-infrastructure detail section (white)</h2>
+
+<p><strong>Goal:</strong> Section stays white (<code class="language-plaintext highlighter-rouge">bg-paper-50</code>). Cards use the default <code class="language-plaintext highlighter-rouge">service-card.html</code> include on <code class="language-plaintext highlighter-rouge">bg-paper-100</code>. Heading remapped to new tokens.</p>
+
+<p><strong>Files:</strong></p>
+<ul class="task-list">
+  <li>
+    <p>Modify: <code class="language-plaintext highlighter-rouge">index.html</code> (lines 71–86 — the “Detailed Services - Specialized” block)</p>
+  </li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 1: Replace the specialized-infrastructure <code class="language-plaintext highlighter-rouge">&lt;section&gt;</code> block</strong></p>
+  </li>
+</ul>
+
+<p>Find and replace lines 71–86 with:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Detailed Services - Specialized --&gt;</span>
+<span class="nt">&lt;section</span> <span class="na">class=</span><span class="s">"py-16 md:py-24 bg-paper-50"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container mx-auto px-4 sm:px-6 lg:px-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"mb-12"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">"text-3xl font-semibold leading-[1.1] text-ink-800 mb-4"</span><span class="nt">&gt;</span>Specialized Infrastructure Services<span class="nt">&lt;/h2&gt;</span>
+            <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-lg leading-[1.5] text-ink-700"</span><span class="nt">&gt;</span>
+                Expert infrastructure, architecture, and development for digital identity, EUDI Wallet, and digital health systems with focus on security and compliance.
+            <span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"grid grid-cols-1 lg:grid-cols-2 gap-6"</span><span class="nt">&gt;</span>
+            
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bg-paper-100 rounded-md p-8 shadow-card"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex items-start space-x-4"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-shrink-0"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"fingerprint"</span> <span class="na">class=</span><span class="s">"w-6 h-6 text-brand-500"</span><span class="nt">&gt;&lt;/i&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-1"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"text-xl font-semibold leading-[1.19] mb-2 text-ink-800"</span><span class="nt">&gt;</span>Digital Identity Solutions<span class="nt">&lt;/h3&gt;</span>
+            <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-ink-700 mb-4"</span><span class="nt">&gt;</span>End-to-end infrastructure, SRE, and software development solutions for digital identity systems with focus on security, scalability, and compliance.<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"space-y-1.5"</span><span class="nt">&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Identity infrastructure architecture and implementation<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>SRE and DevOps for identity platforms<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Custom software development for identity management<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Security and compliance (eIDAS, GDPR)<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Scalable identity verification systems<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Integration with existing IAM solutions<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+            <span class="nt">&lt;/ul&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+            
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bg-paper-100 rounded-md p-8 shadow-card"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex items-start space-x-4"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-shrink-0"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"wallet"</span> <span class="na">class=</span><span class="s">"w-6 h-6 text-brand-500"</span><span class="nt">&gt;&lt;/i&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-1"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"text-xl font-semibold leading-[1.19] mb-2 text-ink-800"</span><span class="nt">&gt;</span>EUDI Wallet Infrastructure<span class="nt">&lt;/h3&gt;</span>
+            <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-ink-700 mb-4"</span><span class="nt">&gt;</span>Specialized infrastructure and architecture consulting for European Digital Identity (EUDI) Wallet implementations.<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"space-y-1.5"</span><span class="nt">&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>EUDI Wallet architecture design<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Infrastructure setup and deployment<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>eIDAS 2.0 compliance consulting<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Security architecture for digital credentials<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Integration with national identity systems<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Performance optimization and scalability<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+            <span class="nt">&lt;/ul&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+            
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bg-paper-100 rounded-md p-8 shadow-card"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex items-start space-x-4"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-shrink-0"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"heart-pulse"</span> <span class="na">class=</span><span class="s">"w-6 h-6 text-brand-500"</span><span class="nt">&gt;&lt;/i&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-1"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"text-xl font-semibold leading-[1.19] mb-2 text-ink-800"</span><span class="nt">&gt;</span>Digital Health Infrastructure (gematik)<span class="nt">&lt;/h3&gt;</span>
+            <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-ink-700 mb-4"</span><span class="nt">&gt;</span>Infrastructure and architecture solutions for digital health projects following gematik specifications and German healthcare standards.<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"space-y-1.5"</span><span class="nt">&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>gematik-compliant infrastructure architecture<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Telematikinfrastruktur (TI) integration<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>eHealth application infrastructure<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Security and data protection (GDPR, HIPAA)<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Electronic health record (EHR) systems<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Healthcare interoperability solutions<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+            <span class="nt">&lt;/ul&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+            
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bg-paper-100 rounded-md p-8 shadow-card"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex items-start space-x-4"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-shrink-0"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"cloud"</span> <span class="na">class=</span><span class="s">"w-6 h-6 text-brand-500"</span><span class="nt">&gt;&lt;/i&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-1"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"text-xl font-semibold leading-[1.19] mb-2 text-ink-800"</span><span class="nt">&gt;</span>Cloud Infrastructure Design<span class="nt">&lt;/h3&gt;</span>
+            <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-ink-700 mb-4"</span><span class="nt">&gt;</span>Design and implement secure, scalable cloud infrastructure on AWS, Azure, and Google Cloud Platform.<span class="nt">&lt;/p&gt;</span>
+            <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"space-y-1.5"</span><span class="nt">&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Multi-cloud architecture design<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Infrastructure as Code (Terraform, CloudFormation)<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>High availability and disaster recovery<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+                <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Cloud security and compliance<span class="nt">&lt;/span&gt;</span>
+                <span class="nt">&lt;/li&gt;</span>
+                
+            <span class="nt">&lt;/ul&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+            
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/section&gt;</span>
+</code></pre></div></div>
+
+<p>The include renders cards on <code class="language-plaintext highlighter-rouge">bg-paper-100</code> which reads cleanly against the <code class="language-plaintext highlighter-rouge">bg-paper-50</code> section.</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 2: Commit</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add index.html
+git commit <span class="nt">-m</span> <span class="s2">"style: specialized infrastructure section on paper-50"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="task-11-rewrite-development-ops-detail-section-light-gray-with-white-cards">Task 11: Rewrite development-ops detail section (light-gray with white cards)</h2>
+
+<p><strong>Goal:</strong> Section stays <code class="language-plaintext highlighter-rouge">bg-paper-100</code>. Because this section’s background matches the default card bg, we inline a white-card variant rather than using the include.</p>
+
+<p><strong>Files:</strong></p>
+<ul class="task-list">
+  <li>
+    <p>Modify: <code class="language-plaintext highlighter-rouge">index.html</code> (lines 88–103 — the “Detailed Services - Development” block)</p>
+  </li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 1: Replace the development-ops <code class="language-plaintext highlighter-rouge">&lt;section&gt;</code> block</strong></p>
+  </li>
+</ul>
+
+<p>Find and replace lines 88–103 with:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Detailed Services - Development --&gt;</span>
+<span class="nt">&lt;section</span> <span class="na">class=</span><span class="s">"py-16 md:py-24 bg-paper-100"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container mx-auto px-4 sm:px-6 lg:px-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"mb-12"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">"text-3xl font-semibold leading-[1.1] text-ink-800 mb-4"</span><span class="nt">&gt;</span>Development <span class="ni">&amp;amp;</span> Operations<span class="nt">&lt;/h2&gt;</span>
+            <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-lg leading-[1.5] text-ink-700"</span><span class="nt">&gt;</span>
+                Modern DevOps, SRE practices, and custom software development to deliver secure, scalable, and compliant solutions.
+            <span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"grid grid-cols-1 lg:grid-cols-2 gap-6"</span><span class="nt">&gt;</span>
+            
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bg-white rounded-md p-8 shadow-card"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex items-start space-x-4"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-shrink-0"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center"</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"git-branch"</span> <span class="na">class=</span><span class="s">"w-6 h-6 text-brand-500"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                        <span class="nt">&lt;/div&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-1"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"text-xl font-semibold leading-[1.19] mb-2 text-ink-800"</span><span class="nt">&gt;</span>DevOps <span class="err">&amp;</span> SRE<span class="nt">&lt;/h3&gt;</span>
+                        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-ink-700 mb-4"</span><span class="nt">&gt;</span>Implement modern DevOps practices and Site Reliability Engineering to improve delivery and operational excellence.<span class="nt">&lt;/p&gt;</span>
+                        <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"space-y-1.5"</span><span class="nt">&gt;</span>
+                            
+                            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>CI/CD pipeline development<span class="nt">&lt;/span&gt;</span>
+                            <span class="nt">&lt;/li&gt;</span>
+                            
+                            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>SRE best practices implementation<span class="nt">&lt;/span&gt;</span>
+                            <span class="nt">&lt;/li&gt;</span>
+                            
+                            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Monitoring and observability<span class="nt">&lt;/span&gt;</span>
+                            <span class="nt">&lt;/li&gt;</span>
+                            
+                            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Incident management and on-call optimization<span class="nt">&lt;/span&gt;</span>
+                            <span class="nt">&lt;/li&gt;</span>
+                            
+                        <span class="nt">&lt;/ul&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                <span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+            
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bg-white rounded-md p-8 shadow-card"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex items-start space-x-4"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-shrink-0"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center"</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"code"</span> <span class="na">class=</span><span class="s">"w-6 h-6 text-brand-500"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                        <span class="nt">&lt;/div&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-1"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"text-xl font-semibold leading-[1.19] mb-2 text-ink-800"</span><span class="nt">&gt;</span>Custom Software Development<span class="nt">&lt;/h3&gt;</span>
+                        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-ink-700 mb-4"</span><span class="nt">&gt;</span>Develop secure, scalable software solutions tailored to your specific requirements.<span class="nt">&lt;/p&gt;</span>
+                        <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"space-y-1.5"</span><span class="nt">&gt;</span>
+                            
+                            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Full-stack application development<span class="nt">&lt;/span&gt;</span>
+                            <span class="nt">&lt;/li&gt;</span>
+                            
+                            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>API design and development<span class="nt">&lt;/span&gt;</span>
+                            <span class="nt">&lt;/li&gt;</span>
+                            
+                            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Microservices architecture<span class="nt">&lt;/span&gt;</span>
+                            <span class="nt">&lt;/li&gt;</span>
+                            
+                            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Security-first development practices<span class="nt">&lt;/span&gt;</span>
+                            <span class="nt">&lt;/li&gt;</span>
+                            
+                        <span class="nt">&lt;/ul&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                <span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+            
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bg-white rounded-md p-8 shadow-card"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex items-start space-x-4"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-shrink-0"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center"</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"shield"</span> <span class="na">class=</span><span class="s">"w-6 h-6 text-brand-500"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                        <span class="nt">&lt;/div&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-1"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"text-xl font-semibold leading-[1.19] mb-2 text-ink-800"</span><span class="nt">&gt;</span>Security <span class="err">&amp;</span> Compliance<span class="nt">&lt;/h3&gt;</span>
+                        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-ink-700 mb-4"</span><span class="nt">&gt;</span>Ensure your systems meet industry standards and regulatory requirements with comprehensive security solutions.<span class="nt">&lt;/p&gt;</span>
+                        <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"space-y-1.5"</span><span class="nt">&gt;</span>
+                            
+                            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Security architecture and audits<span class="nt">&lt;/span&gt;</span>
+                            <span class="nt">&lt;/li&gt;</span>
+                            
+                            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Compliance consulting (GDPR, eIDAS, HIPAA)<span class="nt">&lt;/span&gt;</span>
+                            <span class="nt">&lt;/li&gt;</span>
+                            
+                            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Penetration testing and vulnerability assessment<span class="nt">&lt;/span&gt;</span>
+                            <span class="nt">&lt;/li&gt;</span>
+                            
+                            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-ink-700"</span><span class="nt">&gt;</span>Identity and access management<span class="nt">&lt;/span&gt;</span>
+                            <span class="nt">&lt;/li&gt;</span>
+                            
+                        <span class="nt">&lt;/ul&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                <span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+            
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/section&gt;</span>
+</code></pre></div></div>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 2: Commit</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add index.html
+git commit <span class="nt">-m</span> <span class="s2">"style: development &amp; ops on paper-100 with white card variant"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="task-12-rewrite-architecture-advisory-detail-section-dark-anchor">Task 12: Rewrite architecture-advisory detail section (dark anchor)</h2>
+
+<p><strong>Goal:</strong> This is the mid-page dark moment. Section <code class="language-plaintext highlighter-rouge">bg-ink-900</code>. Cards on <code class="language-plaintext highlighter-rouge">bg-darksurf-1</code>, no shadow, white text, <code class="language-plaintext highlighter-rouge">brand-darklink</code> accents.</p>
+
+<p><strong>Files:</strong></p>
+<ul class="task-list">
+  <li>
+    <p>Modify: <code class="language-plaintext highlighter-rouge">index.html</code> (lines 105–120 — the “Detailed Services - Consulting” block)</p>
+  </li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 1: Replace the architecture-advisory <code class="language-plaintext highlighter-rouge">&lt;section&gt;</code> block</strong></p>
+  </li>
+</ul>
+
+<p>Find and replace lines 105–120 with:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Detailed Services - Consulting --&gt;</span>
+<span class="nt">&lt;section</span> <span class="na">class=</span><span class="s">"py-16 md:py-24 bg-ink-900"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container mx-auto px-4 sm:px-6 lg:px-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"mb-12"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">"text-3xl font-semibold leading-[1.1] text-white mb-4"</span><span class="nt">&gt;</span>Architecture <span class="ni">&amp;amp;</span> Advisory<span class="nt">&lt;/h2&gt;</span>
+            <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-lg leading-[1.5] text-white/80"</span><span class="nt">&gt;</span>
+                Strategic technical guidance for infrastructure modernization, technology selection, and compliance requirements.
+            <span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"grid grid-cols-1 lg:grid-cols-2 gap-6"</span><span class="nt">&gt;</span>
+            
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bg-darksurf-1 rounded-md p-8"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex items-start space-x-4"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-shrink-0"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"w-12 h-12 rounded-md bg-brand-darklink/10 flex items-center justify-center"</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"layers"</span> <span class="na">class=</span><span class="s">"w-6 h-6 text-brand-darklink"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                        <span class="nt">&lt;/div&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-1"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"text-xl font-semibold leading-[1.19] mb-2 text-white"</span><span class="nt">&gt;</span>Architecture Consulting<span class="nt">&lt;/h3&gt;</span>
+                        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-white/80 mb-4"</span><span class="nt">&gt;</span>Expert guidance on system architecture, technology selection, and scalability planning.<span class="nt">&lt;/p&gt;</span>
+                        <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"space-y-1.5"</span><span class="nt">&gt;</span>
+                            
+                            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-darklink mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-white/80"</span><span class="nt">&gt;</span>Architecture design and review<span class="nt">&lt;/span&gt;</span>
+                            <span class="nt">&lt;/li&gt;</span>
+                            
+                            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-darklink mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-white/80"</span><span class="nt">&gt;</span>Technology stack assessment<span class="nt">&lt;/span&gt;</span>
+                            <span class="nt">&lt;/li&gt;</span>
+                            
+                            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-darklink mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-white/80"</span><span class="nt">&gt;</span>Scalability and performance optimization<span class="nt">&lt;/span&gt;</span>
+                            <span class="nt">&lt;/li&gt;</span>
+                            
+                            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-darklink mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-white/80"</span><span class="nt">&gt;</span>Migration strategy and planning<span class="nt">&lt;/span&gt;</span>
+                            <span class="nt">&lt;/li&gt;</span>
+                            
+                        <span class="nt">&lt;/ul&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                <span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+            
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bg-darksurf-1 rounded-md p-8"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex items-start space-x-4"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-shrink-0"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"w-12 h-12 rounded-md bg-brand-darklink/10 flex items-center justify-center"</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"lightbulb"</span> <span class="na">class=</span><span class="s">"w-6 h-6 text-brand-darklink"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                        <span class="nt">&lt;/div&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-1"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"text-xl font-semibold leading-[1.19] mb-2 text-white"</span><span class="nt">&gt;</span>Technical Advisory<span class="nt">&lt;/h3&gt;</span>
+                        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-white/80 mb-4"</span><span class="nt">&gt;</span>Strategic technical guidance for digital transformation and infrastructure modernization initiatives.<span class="nt">&lt;/p&gt;</span>
+                        <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"space-y-1.5"</span><span class="nt">&gt;</span>
+                            
+                            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-darklink mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-white/80"</span><span class="nt">&gt;</span>Technology roadmap development<span class="nt">&lt;/span&gt;</span>
+                            <span class="nt">&lt;/li&gt;</span>
+                            
+                            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-darklink mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-white/80"</span><span class="nt">&gt;</span>Vendor and solution evaluation<span class="nt">&lt;/span&gt;</span>
+                            <span class="nt">&lt;/li&gt;</span>
+                            
+                            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-darklink mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-white/80"</span><span class="nt">&gt;</span>Risk assessment and mitigation<span class="nt">&lt;/span&gt;</span>
+                            <span class="nt">&lt;/li&gt;</span>
+                            
+                            <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"flex items-start"</span><span class="nt">&gt;</span>
+                                <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"check-circle"</span> <span class="na">class=</span><span class="s">"w-4 h-4 text-brand-darklink mr-2 flex-shrink-0 mt-0.5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                                <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-sm text-white/80"</span><span class="nt">&gt;</span>Team capability building<span class="nt">&lt;/span&gt;</span>
+                            <span class="nt">&lt;/li&gt;</span>
+                            
+                        <span class="nt">&lt;/ul&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                <span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+            
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/section&gt;</span>
+</code></pre></div></div>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 2: Commit</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add index.html
+git commit <span class="nt">-m</span> <span class="s2">"style: architecture advisory as mid-page dark anchor"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="task-13-rewrite-about-section-white">Task 13: Rewrite about section (white)</h2>
+
+<p><strong>Goal:</strong> Section becomes <code class="language-plaintext highlighter-rouge">bg-paper-50</code>. Remove pastel gradient bg. Kill <code class="language-plaintext highlighter-rouge">text-gradient</code> on heading. Remap typography classes.</p>
+
+<p><strong>Files:</strong></p>
+<ul class="task-list">
+  <li>
+    <p>Modify: <code class="language-plaintext highlighter-rouge">index.html</code> (lines 122–134 — the <code class="language-plaintext highlighter-rouge">&lt;section id="about"&gt;</code> block)</p>
+  </li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 1: Replace the about <code class="language-plaintext highlighter-rouge">&lt;section&gt;</code> block</strong></p>
+  </li>
+</ul>
+
+<p>Find and replace lines 122–134 with:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- About Section --&gt;</span>
+<span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"about"</span> <span class="na">class=</span><span class="s">"py-16 md:py-24 bg-paper-50"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container mx-auto px-4 sm:px-6 lg:px-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"max-w-3xl mx-auto text-center mb-12"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">"text-4xl md:text-5xl font-semibold leading-[1.1] text-ink-800 mb-6"</span><span class="nt">&gt;</span>
+                About Octostack
+            <span class="nt">&lt;/h2&gt;</span>
+            <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-lg md:text-xl leading-[1.5] text-ink-700"</span><span class="nt">&gt;</span>
+                We are a team of cloud experts passionate about helping businesses succeed in the digital age through cutting-edge technology and proven best practices.
+            <span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/section&gt;</span>
+</code></pre></div></div>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 2: Commit</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add index.html
+git commit <span class="nt">-m</span> <span class="s2">"style: about section on paper-50, drop pastel gradient and text-gradient"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="task-14-rewrite-values-section-light-gray">Task 14: Rewrite values section (light-gray)</h2>
+
+<p><strong>Goal:</strong> Section becomes <code class="language-plaintext highlighter-rouge">bg-paper-100</code>. Value cards use the same static, white-bg-on-gray variant as the dev-ops cards.</p>
+
+<p><strong>Files:</strong></p>
+<ul class="task-list">
+  <li>
+    <p>Modify: <code class="language-plaintext highlighter-rouge">index.html</code> (lines 136–158 — the “Company Values” block)</p>
+  </li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 1: Replace the values <code class="language-plaintext highlighter-rouge">&lt;section&gt;</code> block</strong></p>
+  </li>
+</ul>
+
+<p>Find and replace lines 136–158 with:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Company Values --&gt;</span>
+<span class="nt">&lt;section</span> <span class="na">class=</span><span class="s">"py-16 md:py-24 bg-paper-100"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container mx-auto px-4 sm:px-6 lg:px-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">"text-3xl font-semibold leading-[1.1] text-ink-800 mb-8"</span><span class="nt">&gt;</span>Our Values<span class="nt">&lt;/h2&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"grid grid-cols-1 md:grid-cols-2 gap-6"</span><span class="nt">&gt;</span>
+            
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bg-white rounded-md p-8 shadow-card"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex items-start space-x-4"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-shrink-0"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center"</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"target"</span> <span class="na">class=</span><span class="s">"w-6 h-6 text-brand-500"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                        <span class="nt">&lt;/div&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                    <span class="nt">&lt;div&gt;</span>
+                        <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"text-xl font-semibold leading-[1.19] text-ink-800 mb-2"</span><span class="nt">&gt;</span>Security <span class="err">&amp;</span> Compliance<span class="nt">&lt;/h3&gt;</span>
+                        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-ink-700"</span><span class="nt">&gt;</span>We prioritize security and regulatory compliance in every solution we deliver, especially for sensitive identity and health data.<span class="nt">&lt;/p&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                <span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+            
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bg-white rounded-md p-8 shadow-card"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex items-start space-x-4"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-shrink-0"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center"</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"award"</span> <span class="na">class=</span><span class="s">"w-6 h-6 text-brand-500"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                        <span class="nt">&lt;/div&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                    <span class="nt">&lt;div&gt;</span>
+                        <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"text-xl font-semibold leading-[1.19] text-ink-800 mb-2"</span><span class="nt">&gt;</span>Technical Excellence<span class="nt">&lt;/h3&gt;</span>
+                        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-ink-700"</span><span class="nt">&gt;</span>Deep expertise in cloud infrastructure, SRE practices, and modern software development methodologies.<span class="nt">&lt;/p&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                <span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+            
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bg-white rounded-md p-8 shadow-card"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex items-start space-x-4"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-shrink-0"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center"</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"users"</span> <span class="na">class=</span><span class="s">"w-6 h-6 text-brand-500"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                        <span class="nt">&lt;/div&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                    <span class="nt">&lt;div&gt;</span>
+                        <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"text-xl font-semibold leading-[1.19] text-ink-800 mb-2"</span><span class="nt">&gt;</span>European Focus<span class="nt">&lt;/h3&gt;</span>
+                        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-ink-700"</span><span class="nt">&gt;</span>Specialized knowledge of European regulations including eIDAS, GDPR, and gematik standards.<span class="nt">&lt;/p&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                <span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+            
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bg-white rounded-md p-8 shadow-card"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex items-start space-x-4"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex-shrink-0"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center"</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"trending-up"</span> <span class="na">class=</span><span class="s">"w-6 h-6 text-brand-500"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                        <span class="nt">&lt;/div&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                    <span class="nt">&lt;div&gt;</span>
+                        <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"text-xl font-semibold leading-[1.19] text-ink-800 mb-2"</span><span class="nt">&gt;</span>Open Communication<span class="nt">&lt;/h3&gt;</span>
+                        <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-ink-700"</span><span class="nt">&gt;</span>Clear, transparent communication in German, English, and Chinese for international collaboration.<span class="nt">&lt;/p&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                <span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+            
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/section&gt;</span>
+</code></pre></div></div>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 2: Commit</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add index.html
+git commit <span class="nt">-m</span> <span class="s2">"style: values section on paper-100 with white card variant"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="task-15-rewrite-contact-section-white">Task 15: Rewrite contact section (white)</h2>
+
+<p><strong>Goal:</strong> Section stays <code class="language-plaintext highlighter-rouge">bg-paper-50</code>. Kill <code class="language-plaintext highlighter-rouge">text-gradient</code> on heading. Cards switch to <code class="language-plaintext highlighter-rouge">bg-paper-100</code> with no border. Icon chips lose pastel <code class="language-plaintext highlighter-rouge">bg-primary-100</code> and gain <code class="language-plaintext highlighter-rouge">bg-brand-500/10</code>. Contact section structure (two cards: contact details + social) is preserved.</p>
+
+<p><strong>Files:</strong></p>
+<ul class="task-list">
+  <li>
+    <p>Modify: <code class="language-plaintext highlighter-rouge">index.html</code> (lines 160–224 — the <code class="language-plaintext highlighter-rouge">&lt;section id="contact"&gt;</code> block)</p>
+  </li>
+  <li class="task-list-item">
+    <p><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 1: Replace the contact <code class="language-plaintext highlighter-rouge">&lt;section&gt;</code> block</strong></p>
+  </li>
+</ul>
+
+<p>Find and replace lines 160–224 with:</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- Contact Section --&gt;</span>
+<span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"contact"</span> <span class="na">class=</span><span class="s">"py-16 md:py-24 bg-paper-50"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container mx-auto px-4 sm:px-6 lg:px-8"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"max-w-3xl mx-auto text-center mb-12"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">"text-4xl md:text-5xl font-semibold leading-[1.1] text-ink-800 mb-6"</span><span class="nt">&gt;</span>
+                Get in Touch
+            <span class="nt">&lt;/h2&gt;</span>
+            <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-lg md:text-xl leading-[1.5] text-ink-700"</span><span class="nt">&gt;</span>
+                Ready to transform your cloud infrastructure? Let's discuss how we can help you achieve your goals.
+            <span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"max-w-3xl mx-auto mt-12"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"text-2xl font-semibold leading-[1.19] text-ink-800 mb-6"</span><span class="nt">&gt;</span>Contact Details<span class="nt">&lt;/h3&gt;</span>
+            <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"grid grid-cols-1 md:grid-cols-2 gap-6"</span><span class="nt">&gt;</span>
+                <span class="c">&lt;!-- Contact Details Card --&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bg-paper-100 rounded-md p-8 shadow-card"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"text-xl font-semibold leading-[1.19] text-ink-800 mb-4"</span><span class="nt">&gt;</span>Contact Details<span class="nt">&lt;/h3&gt;</span>
+                    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"space-y-4"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex items-start space-x-3"</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"user"</span> <span class="na">class=</span><span class="s">"w-5 h-5 text-brand-500 mt-1 flex-shrink-0"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                            <span class="nt">&lt;div&gt;</span>
+                                <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"font-semibold text-ink-800"</span><span class="nt">&gt;</span>Name<span class="nt">&lt;/p&gt;</span>
+                                <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-ink-700"</span><span class="nt">&gt;</span>Liang Shi<span class="nt">&lt;/p&gt;</span>
+                            <span class="nt">&lt;/div&gt;</span>
+                        <span class="nt">&lt;/div&gt;</span>
+                        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex items-start space-x-3"</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"mail"</span> <span class="na">class=</span><span class="s">"w-5 h-5 text-brand-500 mt-1 flex-shrink-0"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                            <span class="nt">&lt;div&gt;</span>
+                                <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"font-semibold text-ink-800"</span><span class="nt">&gt;</span>Email<span class="nt">&lt;/p&gt;</span>
+                                <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"mailto:hello@octostack.de"</span> <span class="na">class=</span><span class="s">"text-brand-link hover:underline transition-colors"</span><span class="nt">&gt;</span>
+                                    hello@octostack.de
+                                <span class="nt">&lt;/a&gt;</span>
+                            <span class="nt">&lt;/div&gt;</span>
+                        <span class="nt">&lt;/div&gt;</span>
+                        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex items-start space-x-3"</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"map-pin"</span> <span class="na">class=</span><span class="s">"w-5 h-5 text-brand-500 mt-1 flex-shrink-0"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                            <span class="nt">&lt;div&gt;</span>
+                                <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"font-semibold text-ink-800"</span><span class="nt">&gt;</span>Location<span class="nt">&lt;/p&gt;</span>
+                                <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"text-ink-700"</span><span class="nt">&gt;</span>Berlin, Germany<span class="nt">&lt;/p&gt;</span>
+                            <span class="nt">&lt;/div&gt;</span>
+                        <span class="nt">&lt;/div&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                <span class="nt">&lt;/div&gt;</span>
+
+                <span class="c">&lt;!-- Social Media Card --&gt;</span>
+                <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bg-paper-100 rounded-md p-8 shadow-card"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;h3</span> <span class="na">class=</span><span class="s">"text-xl font-semibold leading-[1.19] text-ink-800 mb-4"</span><span class="nt">&gt;</span>Follow Us<span class="nt">&lt;/h3&gt;</span>
+                    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"flex space-x-4"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://www.linkedin.com/in/liang-shi-berlin/"</span> <span class="na">target=</span><span class="s">"_blank"</span> <span class="na">rel=</span><span class="s">"noopener noreferrer"</span>
+                           <span class="na">class=</span><span class="s">"w-10 h-10 rounded-md bg-brand-500/10 flex items-center justify-center text-brand-500 hover:bg-brand-500 hover:text-white transition-colors"</span>
+                           <span class="na">aria-label=</span><span class="s">"LinkedIn"</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"linkedin"</span> <span class="na">class=</span><span class="s">"w-5 h-5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                        <span class="nt">&lt;/a&gt;</span>
+                        <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"https://github.com/octostack-de/"</span> <span class="na">target=</span><span class="s">"_blank"</span> <span class="na">rel=</span><span class="s">"noopener noreferrer"</span>
+                           <span class="na">class=</span><span class="s">"w-10 h-10 rounded-md bg-brand-500/10 flex items-center justify-center text-brand-500 hover:bg-brand-500 hover:text-white transition-colors"</span>
+                           <span class="na">aria-label=</span><span class="s">"GitHub"</span><span class="nt">&gt;</span>
+                            <span class="nt">&lt;i</span> <span class="na">data-lucide=</span><span class="s">"github"</span> <span class="na">class=</span><span class="s">"w-5 h-5"</span><span class="nt">&gt;&lt;/i&gt;</span>
+                        <span class="nt">&lt;/a&gt;</span>
+                    <span class="nt">&lt;/div&gt;</span>
+                <span class="nt">&lt;/div&gt;</span>
+            <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/section&gt;</span>
+</code></pre></div></div>
+
+<p>Structural content (duplicate “Contact Details” H3, social card, etc.) is deliberately preserved — spec §Explicit Non-Goals lists section restructuring as out of scope.</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 2: Commit</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add index.html
+git commit <span class="nt">-m</span> <span class="s2">"style: contact section on paper-50 with paper-100 cards and brand-tinted chips"</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="task-16-final-verification-build-visual-check-pr-prep">Task 16: Final verification, build, visual check, PR prep</h2>
+
+<p><strong>Goal:</strong> Prove the spec’s success criteria hold. Build passes. No old tokens remain anywhere. Visual check in browser passes. Then push and open PR.</p>
+
+<p><strong>Files:</strong> none modified — verification only.</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 1: Run the spec’s grep checks</strong></li>
+</ul>
+
+<p>Run the following commands (from the spec §Success Criteria). All must return empty output OR exit non-zero (meaning no matches):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">-r</span> <span class="s1">'text-gradient'</span> index.html _includes _layouts src/css <span class="o">||</span> <span class="nb">echo</span> <span class="s2">"text-gradient: clean"</span>
+<span class="nb">grep</span> <span class="nt">-r</span> <span class="s1">'bg-gradient-to'</span> index.html _includes _layouts src/css <span class="o">||</span> <span class="nb">echo</span> <span class="s2">"bg-gradient-to: clean"</span>
+<span class="nb">grep</span> <span class="nt">-r</span> <span class="s1">'blur-3xl'</span> index.html _includes _layouts src/css <span class="o">||</span> <span class="nb">echo</span> <span class="s2">"blur-3xl: clean"</span>
+<span class="nb">grep</span> <span class="nt">-rE</span> <span class="s1">'accent-|primary-|secondary-'</span> index.html _includes _layouts src/css assets/js <span class="o">||</span> <span class="nb">echo</span> <span class="s2">"old token classes: clean"</span>
+<span class="nb">grep</span> <span class="nt">-rE</span> <span class="s1">'shadow-lg|hover:-translate-y'</span> index.html _includes _layouts src/css <span class="o">||</span> <span class="nb">echo</span> <span class="s2">"decorative shadow/hover-lift: clean"</span>
+<span class="nb">grep</span> <span class="nt">-E</span> <span class="s1">'"accent"|\baccent:'</span> tailwind.config.js <span class="o">||</span> <span class="nb">echo</span> <span class="s2">"accent key absent from tailwind config: clean"</span>
+</code></pre></div></div>
+
+<p>Expected: each one prints its <code class="language-plaintext highlighter-rouge">clean</code> message (or empty). If any returns matches, stop — fix the stray reference in-place and re-run.</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 2: Run full production build</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm run build
+</code></pre></div></div>
+
+<p>Expected: exits 0. <code class="language-plaintext highlighter-rouge">_site/assets/css/main.css</code> exists and contains the compiled Tailwind output. If it fails, read the error, fix, and re-run.</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 3: Start dev server and visually verify</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm run dev
+</code></pre></div></div>
+
+<p>Open http://localhost:4000 in a browser.</p>
+
+<p>Visual checklist (walk through once at desktop width, once at ≤640px):</p>
+<ul>
+  <li><strong>Hero:</strong> solid black background, white headline in Inter semibold with tight tracking, no blur blobs, no icon pill, no pastel gradient. Primary CTA is a blue pill; outline CTA is a cyan outline pill.</li>
+  <li><strong>Nav:</strong> white translucent on the dark hero — should read as frosted glass, not opaque. Scroll through sections; active link darkens (ink-800) rather than turning blue.</li>
+  <li><strong>Services overview:</strong> light gray section, three white cards with soft shadow, heading is plain ink (no gradient).</li>
+  <li><strong>Specialized infrastructure:</strong> white section, cards on <code class="language-plaintext highlighter-rouge">paper-100</code> (slightly gray cards on white).</li>
+  <li><strong>Development &amp; ops:</strong> light gray section, white cards.</li>
+  <li><strong>Architecture advisory:</strong> solid black mid-page block. Cards are dark-surf gray. Icons/checks/links are cyan (<code class="language-plaintext highlighter-rouge">brand-darklink</code>). Text is white.</li>
+  <li><strong>About:</strong> white section, plain ink heading.</li>
+  <li><strong>Values:</strong> light gray section with white cards.</li>
+  <li><strong>Contact:</strong> white section, <code class="language-plaintext highlighter-rouge">paper-100</code> cards, brand-tinted icon chips, email link is ocean-blue and underlines on hover.</li>
+  <li><strong>Footer:</strong> near-black (<code class="language-plaintext highlighter-rouge">ink-800</code>). Only LinkedIn and GitHub icons — no Twitter.</li>
+  <li><strong>Focus rings:</strong> tab through CTAs; each primary/outline pill should show a blue 2px ring.</li>
+</ul>
+
+<p>If anything visually regresses, identify which Task owns that section, fix in-place, commit with a <code class="language-plaintext highlighter-rouge">style: fix &lt;section&gt;</code> message, and re-run verification.</p>
+
+<ul class="task-list">
+  <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled" /><strong>Step 4: Push branch and open PR</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push <span class="nt">-u</span> origin style/design-md-alignment
+gh <span class="nb">pr </span>create <span class="nt">--title</span> <span class="s2">"style: align visual system with DESIGN.md"</span> <span class="nt">--body</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">cat</span> <span class="o">&lt;&lt;</span><span class="sh">'</span><span class="no">EOF</span><span class="sh">'
+## Summary
+- Adopts DESIGN.md discipline (typography, tight tracking, pill CTAs, cinematic dark/light rhythm) while keeping Octostack ocean blue as the single accent.
+- Self-hosts Inter variable font (DSGVO-safe).
+- Replaces Tailwind `primary`/`secondary`/`accent` scales with `ink`/`paper`/`brand`/`darksurf` tokens.
+- Three dark anchors: hero, architecture advisory, footer. The rest is a white ↔ light-gray rhythm.
+- Removes Twitter link from footer (no active presence; empty link hurts trust).
+
+No copy, structural, or content changes. Spec: `docs/superpowers/specs/2026-04-19-design-md-alignment-design.md`.
+
+## Test plan
+- [ ] `npm run build` exits 0
+- [ ] All grep checks from spec §Success Criteria return no matches
+- [ ] Visual verification: hero is black, one mid-section is black, footer is dark; rest is white/light-gray; only `brand-500` / `brand-darklink` blue appears as chromatic accent
+- [ ] Focus rings visible on CTAs
+- [ ] Mobile breakpoint still usable (≤640px)
+- [ ] Deploy workflow green after merge
+</span><span class="no">EOF
+</span><span class="si">)</span><span class="s2">"</span>
+</code></pre></div></div>
+
+<p>Return the PR URL in the final reply.</p>
+
+<hr />
+
+<h2 id="self-review-checklist">Self-Review Checklist</h2>
+
+<p>Run mentally before handing off to execution:</p>
+
+<ol>
+  <li><strong>Spec coverage</strong>
+    <ul>
+      <li>Design tokens (Task 2) ✓</li>
+      <li>Inter typography + tight tracking (Tasks 1, 2, 3) ✓</li>
+      <li>Primary CTA, outline CTA, learn-more link styles (Task 8 hero CTAs cover primary + outline; learn-more link not currently used in any section — the spec introduces the style but no section references it, so we omit rather than invent a placeholder) ✓</li>
+      <li>Service card light variant (Task 6 include, used by Task 10) ✓</li>
+      <li>Service card light-gray variant (Tasks 9, 11, 14 inline the <code class="language-plaintext highlighter-rouge">bg-white</code> flip) ✓</li>
+      <li>Service card dark variant (Task 12 inlines the <code class="language-plaintext highlighter-rouge">bg-darksurf-1</code> variant) ✓</li>
+      <li>Nav light glass (Task 4) ✓</li>
+      <li>Footer dark anchor + Twitter removal (Task 5) ✓</li>
+      <li>Hero icon pill removed (Task 8) ✓</li>
+      <li>Section rhythm map rows 1–8 + footer (Tasks 8, 9, 10, 11, 12, 13, 14, 15, 5) ✓</li>
+      <li><code class="language-plaintext highlighter-rouge">main.js</code> token swap (Task 7) ✓</li>
+      <li>Success criteria grep checks (Task 16) ✓</li>
+    </ul>
+  </li>
+  <li><strong>No placeholders</strong>
+    <ul>
+      <li>Every code block is concrete and complete. No “TBD” / “similar to Task N” / “add appropriate error handling”. ✓</li>
+    </ul>
+  </li>
+  <li><strong>Type consistency</strong>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">ink-800</code> / <code class="language-plaintext highlighter-rouge">ink-700</code> used consistently for text on light. ✓</li>
+      <li><code class="language-plaintext highlighter-rouge">brand-500</code> everywhere on light, <code class="language-plaintext highlighter-rouge">brand-darklink</code> everywhere on dark. ✓</li>
+      <li><code class="language-plaintext highlighter-rouge">rounded-md</code> for cards and icon chips, <code class="language-plaintext highlighter-rouge">rounded-full</code> for CTA pills — matches spec exactly (Tailwind defaults, no custom <code class="language-plaintext highlighter-rouge">rounded-pill</code>/<code class="language-plaintext highlighter-rouge">rounded-sm</code>). ✓</li>
+      <li><code class="language-plaintext highlighter-rouge">shadow-card</code> is the only card shadow token referenced; defined in Task 2 <code class="language-plaintext highlighter-rouge">tailwind.config.js</code>. ✓</li>
+      <li>Font stack: <code class="language-plaintext highlighter-rouge">Inter</code> first, then system fallbacks — consistent between <code class="language-plaintext highlighter-rouge">input.css</code> <code class="language-plaintext highlighter-rouge">@font-face</code> definition, <code class="language-plaintext highlighter-rouge">tailwind.config.js</code> <code class="language-plaintext highlighter-rouge">fontFamily.sans</code>, and the preload hint in <code class="language-plaintext highlighter-rouge">_layouts/default.html</code>. ✓</li>
+    </ul>
+  </li>
+  <li><strong>Known scope decisions</strong>
+    <ul>
+      <li>“Learn more” inline link is specified in the spec but not used by any current section. Rather than inventing a placeholder consumer, it lives in the spec only and can be applied when copy rework introduces it.</li>
+      <li>Spec’s non-goal list (copy, Impressum, i18n, Cal.com, logo revision) is respected — zero tasks touch those.</li>
+    </ul>
+  </li>
+</ol>
+
+<h2 id="execution-handoff">Execution Handoff</h2>
+
+<p>Plan complete and saved to <code class="language-plaintext highlighter-rouge">docs/superpowers/plans/2026-04-19-design-md-alignment.md</code>. Two execution options:</p>
+
+<ol>
+  <li><strong>Subagent-Driven (recommended)</strong> — I dispatch a fresh subagent per task, review between tasks, fast iteration</li>
+  <li><strong>Inline Execution</strong> — Execute tasks in this session using executing-plans, batch execution with checkpoints</li>
+</ol>
+
+<p>Which approach?</p>
+
+    </main>
+
+    <footer class="bg-ink-800 text-white/70">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="py-12 md:py-16">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                <!-- Company Info -->
+                <div>
+                    <div class="mb-4">
+                        <img src="/assets/images/octostack-white.png" alt="Octostack Logo" class="h-12 w-auto">
+                    </div>
+                    <p class="text-sm mb-4">Digital Identity & Healthcare Infrastructure Specialists</p>
+                    <div class="flex space-x-4">
+                        <a href="https://www.linkedin.com/in/liang-shi-berlin/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="LinkedIn">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        </a>
+                        <a href="https://github.com/octostack-de/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="GitHub">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="font-semibold text-white mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-sm hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#services" class="text-sm hover:text-white transition-colors">Services</a></li>
+                        <li><a href="#about" class="text-sm hover:text-white transition-colors">About</a></li>
+                        <li><a href="#contact" class="text-sm hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="font-semibold text-white mb-4">Contact</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>
+                            <a href="mailto:hello@octostack.de" class="flex items-center space-x-2 hover:text-white transition-colors">
+                                <i data-lucide="mail" class="w-4 h-4"></i>
+                                <span>hello@octostack.de</span>
+                            </a>
+                        </li>
+                        <li>Berlin, Germany</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="mt-12 pt-8 border-t border-white/10 text-center text-sm">
+                <p>&copy; <span id="current-year"></span> Octostack. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
+
+
+    <script src="/assets/js/main.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>

@@ -43,11 +43,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 const { offsetTop, offsetHeight } = section;
                 if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
                     navLinks.forEach(link => {
-                        link.classList.remove('text-primary-600');
-                        link.classList.add('text-secondary-600');
+                        link.classList.remove('text-ink-800');
+                        link.classList.add('text-ink-700');
                         if (link.getAttribute('href') === `#${sectionId}`) {
-                            link.classList.remove('text-secondary-600');
-                            link.classList.add('text-primary-600');
+                            link.classList.remove('text-ink-700');
+                            link.classList.add('text-ink-800');
                         }
                     });
                 }

@@ -7,13 +7,14 @@
     <meta name="description" content="Specialized infrastructure, SRE, and software development for digital identity systems, EUDI Wallet implementations, and gematik-compliant digital health solutions.">
     <meta name="keywords" content="digital identity, EUDI Wallet, eIDAS, digital health, gematik, Telematikinfrastruktur, identity infrastructure, healthcare IT, SRE, DevOps, cloud infrastructure">
 
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/InterVariable.woff2" crossorigin>
     <link rel="stylesheet" href="/assets/css/main.css">
 
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="flex flex-col min-h-screen">
-    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-secondary-200 shadow-sm">
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-black/5">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20 md:h-24">
             <!-- Logo -->
@@ -23,38 +24,38 @@
 
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="#home" class="nav-link text-sm font-medium transition-colors hover:text-primary-600 cursor-pointer text-secondary-600">
+                <a href="#home" class="nav-link text-sm font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
                     Home
                 </a>
-                <a href="#services" class="nav-link text-sm font-medium transition-colors hover:text-primary-600 cursor-pointer text-secondary-600">
+                <a href="#services" class="nav-link text-sm font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
                     Services
                 </a>
-                <a href="#about" class="nav-link text-sm font-medium transition-colors hover:text-primary-600 cursor-pointer text-secondary-600">
+                <a href="#about" class="nav-link text-sm font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
                     About
                 </a>
-                <a href="#contact" class="nav-link text-sm font-medium transition-colors hover:text-primary-600 cursor-pointer text-secondary-600">
+                <a href="#contact" class="nav-link text-sm font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
                     Contact
                 </a>
             </nav>
 
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden p-2 text-secondary-600 hover:text-primary-600" aria-label="Toggle menu">
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-ink-700 hover:text-ink-800" aria-label="Toggle menu">
                 <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
         </div>
 
         <!-- Mobile Navigation -->
-        <nav id="mobile-menu" class="hidden md:hidden py-4 border-t border-secondary-200">
-            <a href="#home" class="nav-link block py-3 text-base font-medium transition-colors cursor-pointer text-secondary-600 hover:text-primary-600">
+        <nav id="mobile-menu" class="hidden md:hidden py-4 border-t border-black/5">
+            <a href="#home" class="nav-link block py-3 text-base font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
                 Home
             </a>
-            <a href="#services" class="nav-link block py-3 text-base font-medium transition-colors cursor-pointer text-secondary-600 hover:text-primary-600">
+            <a href="#services" class="nav-link block py-3 text-base font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
                 Services
             </a>
-            <a href="#about" class="nav-link block py-3 text-base font-medium transition-colors cursor-pointer text-secondary-600 hover:text-primary-600">
+            <a href="#about" class="nav-link block py-3 text-base font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
                 About
             </a>
-            <a href="#contact" class="nav-link block py-3 text-base font-medium transition-colors cursor-pointer text-secondary-600 hover:text-primary-600">
+            <a href="#contact" class="nav-link block py-3 text-base font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
                 Contact
             </a>
         </nav>
@@ -159,46 +160,46 @@ The entire site is a single page (<code class="language-plaintext highlighter-ro
 
 <p><strong>Liquid Templating Patterns:</strong></p>
 <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-  &lt;div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm hover:shadow-xl hover:shadow-primary-600/10 hover:-translate-y-1 transition-all"&gt;
+  &lt;div class="bg-paper-100 rounded-md p-8 shadow-card"&gt;
     &lt;div class="flex items-start space-x-4"&gt;
         &lt;div class="flex-shrink-0"&gt;
-            &lt;div class="w-12 h-12 bg-gradient-to-br from-primary-100 to-accent-100 rounded-lg flex items-center justify-center"&gt;
-                &lt;i data-lucide="fingerprint" class="w-6 h-6 text-primary-600"&gt;&lt;/i&gt;
+            &lt;div class="w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center"&gt;
+                &lt;i data-lucide="fingerprint" class="w-6 h-6 text-brand-500"&gt;&lt;/i&gt;
             &lt;/div&gt;
         &lt;/div&gt;
         &lt;div class="flex-1"&gt;
-            &lt;h3 class="text-xl font-bold mb-2"&gt;Digital Identity Solutions&lt;/h3&gt;
-            &lt;p class="text-secondary-600 mb-4"&gt;End-to-end infrastructure, SRE, and software development solutions for digital identity systems with focus on security, scalability, and compliance.&lt;/p&gt;
-            &lt;ul class="space-y-2"&gt;
+            &lt;h3 class="text-xl font-semibold leading-[1.19] mb-2 text-ink-800"&gt;Digital Identity Solutions&lt;/h3&gt;
+            &lt;p class="text-ink-700 mb-4"&gt;End-to-end infrastructure, SRE, and software development solutions for digital identity systems with focus on security, scalability, and compliance.&lt;/p&gt;
+            &lt;ul class="space-y-1.5"&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;Identity infrastructure architecture and implementation&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;Identity infrastructure architecture and implementation&lt;/span&gt;
                 &lt;/li&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;SRE and DevOps for identity platforms&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;SRE and DevOps for identity platforms&lt;/span&gt;
                 &lt;/li&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;Custom software development for identity management&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;Custom software development for identity management&lt;/span&gt;
                 &lt;/li&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;Security and compliance (eIDAS, GDPR)&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;Security and compliance (eIDAS, GDPR)&lt;/span&gt;
                 &lt;/li&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;Scalable identity verification systems&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;Scalable identity verification systems&lt;/span&gt;
                 &lt;/li&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;Integration with existing IAM solutions&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;Integration with existing IAM solutions&lt;/span&gt;
                 &lt;/li&gt;
                 
             &lt;/ul&gt;
@@ -207,46 +208,46 @@ The entire site is a single page (<code class="language-plaintext highlighter-ro
 &lt;/div&gt;
 
 
-  &lt;div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm hover:shadow-xl hover:shadow-primary-600/10 hover:-translate-y-1 transition-all"&gt;
+  &lt;div class="bg-paper-100 rounded-md p-8 shadow-card"&gt;
     &lt;div class="flex items-start space-x-4"&gt;
         &lt;div class="flex-shrink-0"&gt;
-            &lt;div class="w-12 h-12 bg-gradient-to-br from-primary-100 to-accent-100 rounded-lg flex items-center justify-center"&gt;
-                &lt;i data-lucide="wallet" class="w-6 h-6 text-primary-600"&gt;&lt;/i&gt;
+            &lt;div class="w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center"&gt;
+                &lt;i data-lucide="wallet" class="w-6 h-6 text-brand-500"&gt;&lt;/i&gt;
             &lt;/div&gt;
         &lt;/div&gt;
         &lt;div class="flex-1"&gt;
-            &lt;h3 class="text-xl font-bold mb-2"&gt;EUDI Wallet Infrastructure&lt;/h3&gt;
-            &lt;p class="text-secondary-600 mb-4"&gt;Specialized infrastructure and architecture consulting for European Digital Identity (EUDI) Wallet implementations.&lt;/p&gt;
-            &lt;ul class="space-y-2"&gt;
+            &lt;h3 class="text-xl font-semibold leading-[1.19] mb-2 text-ink-800"&gt;EUDI Wallet Infrastructure&lt;/h3&gt;
+            &lt;p class="text-ink-700 mb-4"&gt;Specialized infrastructure and architecture consulting for European Digital Identity (EUDI) Wallet implementations.&lt;/p&gt;
+            &lt;ul class="space-y-1.5"&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;EUDI Wallet architecture design&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;EUDI Wallet architecture design&lt;/span&gt;
                 &lt;/li&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;Infrastructure setup and deployment&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;Infrastructure setup and deployment&lt;/span&gt;
                 &lt;/li&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;eIDAS 2.0 compliance consulting&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;eIDAS 2.0 compliance consulting&lt;/span&gt;
                 &lt;/li&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;Security architecture for digital credentials&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;Security architecture for digital credentials&lt;/span&gt;
                 &lt;/li&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;Integration with national identity systems&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;Integration with national identity systems&lt;/span&gt;
                 &lt;/li&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;Performance optimization and scalability&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;Performance optimization and scalability&lt;/span&gt;
                 &lt;/li&gt;
                 
             &lt;/ul&gt;
@@ -255,46 +256,46 @@ The entire site is a single page (<code class="language-plaintext highlighter-ro
 &lt;/div&gt;
 
 
-  &lt;div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm hover:shadow-xl hover:shadow-primary-600/10 hover:-translate-y-1 transition-all"&gt;
+  &lt;div class="bg-paper-100 rounded-md p-8 shadow-card"&gt;
     &lt;div class="flex items-start space-x-4"&gt;
         &lt;div class="flex-shrink-0"&gt;
-            &lt;div class="w-12 h-12 bg-gradient-to-br from-primary-100 to-accent-100 rounded-lg flex items-center justify-center"&gt;
-                &lt;i data-lucide="heart-pulse" class="w-6 h-6 text-primary-600"&gt;&lt;/i&gt;
+            &lt;div class="w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center"&gt;
+                &lt;i data-lucide="heart-pulse" class="w-6 h-6 text-brand-500"&gt;&lt;/i&gt;
             &lt;/div&gt;
         &lt;/div&gt;
         &lt;div class="flex-1"&gt;
-            &lt;h3 class="text-xl font-bold mb-2"&gt;Digital Health Infrastructure (gematik)&lt;/h3&gt;
-            &lt;p class="text-secondary-600 mb-4"&gt;Infrastructure and architecture solutions for digital health projects following gematik specifications and German healthcare standards.&lt;/p&gt;
-            &lt;ul class="space-y-2"&gt;
+            &lt;h3 class="text-xl font-semibold leading-[1.19] mb-2 text-ink-800"&gt;Digital Health Infrastructure (gematik)&lt;/h3&gt;
+            &lt;p class="text-ink-700 mb-4"&gt;Infrastructure and architecture solutions for digital health projects following gematik specifications and German healthcare standards.&lt;/p&gt;
+            &lt;ul class="space-y-1.5"&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;gematik-compliant infrastructure architecture&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;gematik-compliant infrastructure architecture&lt;/span&gt;
                 &lt;/li&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;Telematikinfrastruktur (TI) integration&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;Telematikinfrastruktur (TI) integration&lt;/span&gt;
                 &lt;/li&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;eHealth application infrastructure&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;eHealth application infrastructure&lt;/span&gt;
                 &lt;/li&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;Security and data protection (GDPR, HIPAA)&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;Security and data protection (GDPR, HIPAA)&lt;/span&gt;
                 &lt;/li&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;Electronic health record (EHR) systems&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;Electronic health record (EHR) systems&lt;/span&gt;
                 &lt;/li&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;Healthcare interoperability solutions&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;Healthcare interoperability solutions&lt;/span&gt;
                 &lt;/li&gt;
                 
             &lt;/ul&gt;
@@ -303,36 +304,36 @@ The entire site is a single page (<code class="language-plaintext highlighter-ro
 &lt;/div&gt;
 
 
-  &lt;div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm hover:shadow-xl hover:shadow-primary-600/10 hover:-translate-y-1 transition-all"&gt;
+  &lt;div class="bg-paper-100 rounded-md p-8 shadow-card"&gt;
     &lt;div class="flex items-start space-x-4"&gt;
         &lt;div class="flex-shrink-0"&gt;
-            &lt;div class="w-12 h-12 bg-gradient-to-br from-primary-100 to-accent-100 rounded-lg flex items-center justify-center"&gt;
-                &lt;i data-lucide="cloud" class="w-6 h-6 text-primary-600"&gt;&lt;/i&gt;
+            &lt;div class="w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center"&gt;
+                &lt;i data-lucide="cloud" class="w-6 h-6 text-brand-500"&gt;&lt;/i&gt;
             &lt;/div&gt;
         &lt;/div&gt;
         &lt;div class="flex-1"&gt;
-            &lt;h3 class="text-xl font-bold mb-2"&gt;Cloud Infrastructure Design&lt;/h3&gt;
-            &lt;p class="text-secondary-600 mb-4"&gt;Design and implement secure, scalable cloud infrastructure on AWS, Azure, and Google Cloud Platform.&lt;/p&gt;
-            &lt;ul class="space-y-2"&gt;
+            &lt;h3 class="text-xl font-semibold leading-[1.19] mb-2 text-ink-800"&gt;Cloud Infrastructure Design&lt;/h3&gt;
+            &lt;p class="text-ink-700 mb-4"&gt;Design and implement secure, scalable cloud infrastructure on AWS, Azure, and Google Cloud Platform.&lt;/p&gt;
+            &lt;ul class="space-y-1.5"&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;Multi-cloud architecture design&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;Multi-cloud architecture design&lt;/span&gt;
                 &lt;/li&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;Infrastructure as Code (Terraform, CloudFormation)&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;Infrastructure as Code (Terraform, CloudFormation)&lt;/span&gt;
                 &lt;/li&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;High availability and disaster recovery&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;High availability and disaster recovery&lt;/span&gt;
                 &lt;/li&gt;
                 
                 &lt;li class="flex items-start"&gt;
-                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
-                    &lt;span class="text-sm text-secondary-700"&gt;Cloud security and compliance&lt;/span&gt;
+                    &lt;i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"&gt;&lt;/i&gt;
+                    &lt;span class="text-sm text-ink-700"&gt;Cloud security and compliance&lt;/span&gt;
                 &lt;/li&gt;
                 
             &lt;/ul&gt;
@@ -401,7 +402,7 @@ The entire site is a single page (<code class="language-plaintext highlighter-ro
 
     </main>
 
-    <footer class="bg-secondary-900 text-secondary-300">
+    <footer class="bg-ink-800 text-white/70">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="py-12 md:py-16">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
@@ -412,13 +413,10 @@ The entire site is a single page (<code class="language-plaintext highlighter-ro
                     </div>
                     <p class="text-sm mb-4">Digital Identity & Healthcare Infrastructure Specialists</p>
                     <div class="flex space-x-4">
-                        <a href="https://www.linkedin.com/in/liang-shi-berlin/" target="_blank" rel="noopener noreferrer" class="hover:text-primary-400 transition-colors" aria-label="LinkedIn">
+                        <a href="https://www.linkedin.com/in/liang-shi-berlin/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="LinkedIn">
                             <i data-lucide="linkedin" class="w-5 h-5"></i>
                         </a>
-                        <a href="https://twitter.com/octostack" target="_blank" rel="noopener noreferrer" class="hover:text-primary-400 transition-colors" aria-label="Twitter">
-                            <i data-lucide="twitter" class="w-5 h-5"></i>
-                        </a>
-                        <a href="https://github.com/octostack-de/" target="_blank" rel="noopener noreferrer" class="hover:text-primary-400 transition-colors" aria-label="GitHub">
+                        <a href="https://github.com/octostack-de/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="GitHub">
                             <i data-lucide="github" class="w-5 h-5"></i>
                         </a>
                     </div>
@@ -428,10 +426,10 @@ The entire site is a single page (<code class="language-plaintext highlighter-ro
                 <div>
                     <h3 class="font-semibold text-white mb-4">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="#home" class="text-sm hover:text-primary-400 transition-colors">Home</a></li>
-                        <li><a href="#services" class="text-sm hover:text-primary-400 transition-colors">Services</a></li>
-                        <li><a href="#about" class="text-sm hover:text-primary-400 transition-colors">About</a></li>
-                        <li><a href="#contact" class="text-sm hover:text-primary-400 transition-colors">Contact</a></li>
+                        <li><a href="#home" class="text-sm hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#services" class="text-sm hover:text-white transition-colors">Services</a></li>
+                        <li><a href="#about" class="text-sm hover:text-white transition-colors">About</a></li>
+                        <li><a href="#contact" class="text-sm hover:text-white transition-colors">Contact</a></li>
                     </ul>
                 </div>
 
@@ -440,7 +438,7 @@ The entire site is a single page (<code class="language-plaintext highlighter-ro
                     <h3 class="font-semibold text-white mb-4">Contact</h3>
                     <ul class="space-y-2 text-sm">
                         <li>
-                            <a href="mailto:hello@octostack.de" class="flex items-center space-x-2 hover:text-primary-400 transition-colors">
+                            <a href="mailto:hello@octostack.de" class="flex items-center space-x-2 hover:text-white transition-colors">
                                 <i data-lucide="mail" class="w-4 h-4"></i>
                                 <span>hello@octostack.de</span>
                             </a>
@@ -451,7 +449,7 @@ The entire site is a single page (<code class="language-plaintext highlighter-ro
             </div>
 
             <!-- Copyright -->
-            <div class="mt-12 pt-8 border-t border-secondary-800 text-center text-sm">
+            <div class="mt-12 pt-8 border-t border-white/10 text-center text-sm">
                 <p>&copy; <span id="current-year"></span> Octostack. All rights reserved.</p>
             </div>
         </div>

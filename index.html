@@ -7,13 +7,14 @@
     <meta name="description" content="Specialized infrastructure, SRE, and software development for digital identity systems, EUDI Wallet implementations, and gematik-compliant digital health solutions.">
     <meta name="keywords" content="digital identity, EUDI Wallet, eIDAS, digital health, gematik, Telematikinfrastruktur, identity infrastructure, healthcare IT, SRE, DevOps, cloud infrastructure">
 
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/InterVariable.woff2" crossorigin>
     <link rel="stylesheet" href="/assets/css/main.css">
 
     <!-- Lucide Icons CDN -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body class="flex flex-col min-h-screen">
-    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-secondary-200 shadow-sm">
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-black/5">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20 md:h-24">
             <!-- Logo -->
@@ -23,38 +24,38 @@
 
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="#home" class="nav-link text-sm font-medium transition-colors hover:text-primary-600 cursor-pointer text-secondary-600">
+                <a href="#home" class="nav-link text-sm font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
                     Home
                 </a>
-                <a href="#services" class="nav-link text-sm font-medium transition-colors hover:text-primary-600 cursor-pointer text-secondary-600">
+                <a href="#services" class="nav-link text-sm font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
                     Services
                 </a>
-                <a href="#about" class="nav-link text-sm font-medium transition-colors hover:text-primary-600 cursor-pointer text-secondary-600">
+                <a href="#about" class="nav-link text-sm font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
                     About
                 </a>
-                <a href="#contact" class="nav-link text-sm font-medium transition-colors hover:text-primary-600 cursor-pointer text-secondary-600">
+                <a href="#contact" class="nav-link text-sm font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
                     Contact
                 </a>
             </nav>
 
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden p-2 text-secondary-600 hover:text-primary-600" aria-label="Toggle menu">
+            <button id="mobile-menu-btn" class="md:hidden p-2 text-ink-700 hover:text-ink-800" aria-label="Toggle menu">
                 <i data-lucide="menu" class="w-6 h-6"></i>
             </button>
         </div>
 
         <!-- Mobile Navigation -->
-        <nav id="mobile-menu" class="hidden md:hidden py-4 border-t border-secondary-200">
-            <a href="#home" class="nav-link block py-3 text-base font-medium transition-colors cursor-pointer text-secondary-600 hover:text-primary-600">
+        <nav id="mobile-menu" class="hidden md:hidden py-4 border-t border-black/5">
+            <a href="#home" class="nav-link block py-3 text-base font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
                 Home
             </a>
-            <a href="#services" class="nav-link block py-3 text-base font-medium transition-colors cursor-pointer text-secondary-600 hover:text-primary-600">
+            <a href="#services" class="nav-link block py-3 text-base font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
                 Services
             </a>
-            <a href="#about" class="nav-link block py-3 text-base font-medium transition-colors cursor-pointer text-secondary-600 hover:text-primary-600">
+            <a href="#about" class="nav-link block py-3 text-base font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
                 About
             </a>
-            <a href="#contact" class="nav-link block py-3 text-base font-medium transition-colors cursor-pointer text-secondary-600 hover:text-primary-600">
+            <a href="#contact" class="nav-link block py-3 text-base font-normal transition-colors cursor-pointer text-ink-700 hover:text-ink-800">
                 Contact
             </a>
         </nav>
@@ -64,38 +65,26 @@
 
     <main class="flex-grow">
         <!-- Hero Section -->
-<section id="home" class="relative bg-gradient-to-br from-primary-50 via-white to-accent-50 py-20 md:py-32 overflow-hidden">
-    <!-- Background decoration -->
-    <div class="absolute inset-0 overflow-hidden">
-        <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary-200/30 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-accent-200/30 rounded-full blur-3xl"></div>
-    </div>
-
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+<section id="home" class="bg-ink-900 py-20 md:py-32">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-4xl mx-auto text-center">
-            <!-- Icon -->
-            <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-600 to-accent-500 rounded-2xl mb-8 shadow-lg shadow-primary-600/30">
-                <i data-lucide="cloud" class="w-8 h-8 text-white"></i>
-            </div>
-
             <!-- Heading -->
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                Specialized in
-                <span class="text-gradient">Digital Identity & Healthcare</span> Infrastructure
+            <h1 class="text-5xl md:text-6xl font-semibold leading-[1.07] tracking-[-0.02em] text-white mb-6">
+                Specialized in Digital Identity &amp; Healthcare Infrastructure
             </h1>
 
             <!-- Subheading -->
-            <p class="text-lg md:text-xl text-secondary-600 mb-10 max-w-2xl mx-auto">
+            <p class="text-lg md:text-xl leading-[1.5] text-white/80 mb-10 max-w-2xl mx-auto">
                 Expert infrastructure, SRE, and software development for digital identity systems, EUDI Wallet implementations, and gematik-compliant digital health solutions.
             </p>
 
             <!-- CTAs -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#contact" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg text-white bg-primary-600 hover:bg-primary-700 shadow-lg shadow-primary-600/30 transition-all">
+                <a href="#contact" class="inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-normal rounded-full text-white bg-brand-500 hover:bg-brand-600 transition-colors focus-visible:ring-2 focus-visible:ring-brand-500/40 focus-visible:outline-none">
                     Get Started
-                    <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
                 </a>
-                <a href="#services" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-lg text-primary-600 border-2 border-primary-600 hover:bg-primary-50 transition-all">
+                <a href="#services" class="inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-normal rounded-full text-brand-darklink border border-brand-darklink hover:bg-brand-darklink hover:text-ink-900 transition-colors focus-visible:ring-2 focus-visible:ring-brand-500/40 focus-visible:outline-none">
                     Our Services
                 </a>
             </div>
@@ -104,41 +93,41 @@
 </section>
 
 <!-- Services Overview -->
-<section id="services" class="py-16 md:py-24 bg-white">
+<section id="services" class="py-16 md:py-24 bg-paper-100">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                Our <span class="text-gradient">Specialized Services</span>
+            <h2 class="text-4xl md:text-5xl font-semibold leading-[1.1] text-ink-800 mb-4">
+                Our Specialized Services
             </h2>
-            <p class="text-lg text-secondary-600 max-w-2xl mx-auto">
+            <p class="text-lg leading-[1.5] text-ink-700 max-w-2xl mx-auto">
                 End-to-end solutions for digital identity, EUDI Wallet, and digital health infrastructure
             </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            <div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm hover:shadow-xl hover:shadow-primary-600/10 hover:-translate-y-1 transition-all text-center">
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-100 to-accent-100 rounded-xl mb-4">
-                    <i data-lucide="fingerprint" class="w-8 h-8 text-primary-600"></i>
+            <div class="bg-white rounded-md p-8 shadow-card text-center">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-md bg-brand-500/10 mb-4">
+                    <i data-lucide="fingerprint" class="w-8 h-8 text-brand-500"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-3">Digital Identity Solutions</h3>
-                <p class="text-secondary-600">End-to-end infrastructure, SRE, and software development solutions for digital identity systems with focus on security, scalability, and compliance.</p>
+                <h3 class="text-xl font-semibold leading-[1.19] text-ink-800 mb-3">Digital Identity Solutions</h3>
+                <p class="text-ink-700">End-to-end infrastructure, SRE, and software development solutions for digital identity systems with focus on security, scalability, and compliance.</p>
             </div>
             
-            <div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm hover:shadow-xl hover:shadow-primary-600/10 hover:-translate-y-1 transition-all text-center">
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-100 to-accent-100 rounded-xl mb-4">
-                    <i data-lucide="wallet" class="w-8 h-8 text-primary-600"></i>
+            <div class="bg-white rounded-md p-8 shadow-card text-center">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-md bg-brand-500/10 mb-4">
+                    <i data-lucide="wallet" class="w-8 h-8 text-brand-500"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-3">EUDI Wallet Infrastructure</h3>
-                <p class="text-secondary-600">Specialized infrastructure and architecture consulting for European Digital Identity (EUDI) Wallet implementations.</p>
+                <h3 class="text-xl font-semibold leading-[1.19] text-ink-800 mb-3">EUDI Wallet Infrastructure</h3>
+                <p class="text-ink-700">Specialized infrastructure and architecture consulting for European Digital Identity (EUDI) Wallet implementations.</p>
             </div>
             
-            <div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm hover:shadow-xl hover:shadow-primary-600/10 hover:-translate-y-1 transition-all text-center">
-                <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-primary-100 to-accent-100 rounded-xl mb-4">
-                    <i data-lucide="heart-pulse" class="w-8 h-8 text-primary-600"></i>
+            <div class="bg-white rounded-md p-8 shadow-card text-center">
+                <div class="inline-flex items-center justify-center w-16 h-16 rounded-md bg-brand-500/10 mb-4">
+                    <i data-lucide="heart-pulse" class="w-8 h-8 text-brand-500"></i>
                 </div>
-                <h3 class="text-xl font-bold mb-3">Digital Health Infrastructure (gematik)</h3>
-                <p class="text-secondary-600">Infrastructure and architecture solutions for digital health projects following gematik specifications and German healthcare standards.</p>
+                <h3 class="text-xl font-semibold leading-[1.19] text-ink-800 mb-3">Digital Health Infrastructure (gematik)</h3>
+                <p class="text-ink-700">Infrastructure and architecture solutions for digital health projects following gematik specifications and German healthcare standards.</p>
             </div>
             
         </div>
@@ -146,56 +135,56 @@
 </section>
 
 <!-- Detailed Services - Specialized -->
-<section class="py-16 md:py-24 bg-white">
+<section class="py-16 md:py-24 bg-paper-50">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mb-12">
-            <h2 class="text-3xl font-bold mb-4">Specialized Infrastructure Services</h2>
-            <p class="text-lg text-secondary-600">
+            <h2 class="text-3xl font-semibold leading-[1.1] text-ink-800 mb-4">Specialized Infrastructure Services</h2>
+            <p class="text-lg leading-[1.5] text-ink-700">
                 Expert infrastructure, architecture, and development for digital identity, EUDI Wallet, and digital health systems with focus on security and compliance.
             </p>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             
-            <div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm hover:shadow-xl hover:shadow-primary-600/10 hover:-translate-y-1 transition-all">
+            <div class="bg-paper-100 rounded-md p-8 shadow-card">
     <div class="flex items-start space-x-4">
         <div class="flex-shrink-0">
-            <div class="w-12 h-12 bg-gradient-to-br from-primary-100 to-accent-100 rounded-lg flex items-center justify-center">
-                <i data-lucide="fingerprint" class="w-6 h-6 text-primary-600"></i>
+            <div class="w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center">
+                <i data-lucide="fingerprint" class="w-6 h-6 text-brand-500"></i>
             </div>
         </div>
         <div class="flex-1">
-            <h3 class="text-xl font-bold mb-2">Digital Identity Solutions</h3>
-            <p class="text-secondary-600 mb-4">End-to-end infrastructure, SRE, and software development solutions for digital identity systems with focus on security, scalability, and compliance.</p>
-            <ul class="space-y-2">
+            <h3 class="text-xl font-semibold leading-[1.19] mb-2 text-ink-800">Digital Identity Solutions</h3>
+            <p class="text-ink-700 mb-4">End-to-end infrastructure, SRE, and software development solutions for digital identity systems with focus on security, scalability, and compliance.</p>
+            <ul class="space-y-1.5">
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Identity infrastructure architecture and implementation</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">Identity infrastructure architecture and implementation</span>
                 </li>
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">SRE and DevOps for identity platforms</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">SRE and DevOps for identity platforms</span>
                 </li>
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Custom software development for identity management</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">Custom software development for identity management</span>
                 </li>
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Security and compliance (eIDAS, GDPR)</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">Security and compliance (eIDAS, GDPR)</span>
                 </li>
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Scalable identity verification systems</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">Scalable identity verification systems</span>
                 </li>
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Integration with existing IAM solutions</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">Integration with existing IAM solutions</span>
                 </li>
                 
             </ul>
@@ -204,46 +193,46 @@
 </div>
 
             
-            <div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm hover:shadow-xl hover:shadow-primary-600/10 hover:-translate-y-1 transition-all">
+            <div class="bg-paper-100 rounded-md p-8 shadow-card">
     <div class="flex items-start space-x-4">
         <div class="flex-shrink-0">
-            <div class="w-12 h-12 bg-gradient-to-br from-primary-100 to-accent-100 rounded-lg flex items-center justify-center">
-                <i data-lucide="wallet" class="w-6 h-6 text-primary-600"></i>
+            <div class="w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center">
+                <i data-lucide="wallet" class="w-6 h-6 text-brand-500"></i>
             </div>
         </div>
         <div class="flex-1">
-            <h3 class="text-xl font-bold mb-2">EUDI Wallet Infrastructure</h3>
-            <p class="text-secondary-600 mb-4">Specialized infrastructure and architecture consulting for European Digital Identity (EUDI) Wallet implementations.</p>
-            <ul class="space-y-2">
+            <h3 class="text-xl font-semibold leading-[1.19] mb-2 text-ink-800">EUDI Wallet Infrastructure</h3>
+            <p class="text-ink-700 mb-4">Specialized infrastructure and architecture consulting for European Digital Identity (EUDI) Wallet implementations.</p>
+            <ul class="space-y-1.5">
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">EUDI Wallet architecture design</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">EUDI Wallet architecture design</span>
                 </li>
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Infrastructure setup and deployment</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">Infrastructure setup and deployment</span>
                 </li>
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">eIDAS 2.0 compliance consulting</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">eIDAS 2.0 compliance consulting</span>
                 </li>
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Security architecture for digital credentials</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">Security architecture for digital credentials</span>
                 </li>
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Integration with national identity systems</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">Integration with national identity systems</span>
                 </li>
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Performance optimization and scalability</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">Performance optimization and scalability</span>
                 </li>
                 
             </ul>
@@ -252,46 +241,46 @@
 </div>
 
             
-            <div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm hover:shadow-xl hover:shadow-primary-600/10 hover:-translate-y-1 transition-all">
+            <div class="bg-paper-100 rounded-md p-8 shadow-card">
     <div class="flex items-start space-x-4">
         <div class="flex-shrink-0">
-            <div class="w-12 h-12 bg-gradient-to-br from-primary-100 to-accent-100 rounded-lg flex items-center justify-center">
-                <i data-lucide="heart-pulse" class="w-6 h-6 text-primary-600"></i>
+            <div class="w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center">
+                <i data-lucide="heart-pulse" class="w-6 h-6 text-brand-500"></i>
             </div>
         </div>
         <div class="flex-1">
-            <h3 class="text-xl font-bold mb-2">Digital Health Infrastructure (gematik)</h3>
-            <p class="text-secondary-600 mb-4">Infrastructure and architecture solutions for digital health projects following gematik specifications and German healthcare standards.</p>
-            <ul class="space-y-2">
+            <h3 class="text-xl font-semibold leading-[1.19] mb-2 text-ink-800">Digital Health Infrastructure (gematik)</h3>
+            <p class="text-ink-700 mb-4">Infrastructure and architecture solutions for digital health projects following gematik specifications and German healthcare standards.</p>
+            <ul class="space-y-1.5">
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">gematik-compliant infrastructure architecture</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">gematik-compliant infrastructure architecture</span>
                 </li>
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Telematikinfrastruktur (TI) integration</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">Telematikinfrastruktur (TI) integration</span>
                 </li>
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">eHealth application infrastructure</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">eHealth application infrastructure</span>
                 </li>
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Security and data protection (GDPR, HIPAA)</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">Security and data protection (GDPR, HIPAA)</span>
                 </li>
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Electronic health record (EHR) systems</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">Electronic health record (EHR) systems</span>
                 </li>
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Healthcare interoperability solutions</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">Healthcare interoperability solutions</span>
                 </li>
                 
             </ul>
@@ -300,36 +289,36 @@
 </div>
 
             
-            <div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm hover:shadow-xl hover:shadow-primary-600/10 hover:-translate-y-1 transition-all">
+            <div class="bg-paper-100 rounded-md p-8 shadow-card">
     <div class="flex items-start space-x-4">
         <div class="flex-shrink-0">
-            <div class="w-12 h-12 bg-gradient-to-br from-primary-100 to-accent-100 rounded-lg flex items-center justify-center">
-                <i data-lucide="cloud" class="w-6 h-6 text-primary-600"></i>
+            <div class="w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center">
+                <i data-lucide="cloud" class="w-6 h-6 text-brand-500"></i>
             </div>
         </div>
         <div class="flex-1">
-            <h3 class="text-xl font-bold mb-2">Cloud Infrastructure Design</h3>
-            <p class="text-secondary-600 mb-4">Design and implement secure, scalable cloud infrastructure on AWS, Azure, and Google Cloud Platform.</p>
-            <ul class="space-y-2">
+            <h3 class="text-xl font-semibold leading-[1.19] mb-2 text-ink-800">Cloud Infrastructure Design</h3>
+            <p class="text-ink-700 mb-4">Design and implement secure, scalable cloud infrastructure on AWS, Azure, and Google Cloud Platform.</p>
+            <ul class="space-y-1.5">
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Multi-cloud architecture design</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">Multi-cloud architecture design</span>
                 </li>
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Infrastructure as Code (Terraform, CloudFormation)</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">Infrastructure as Code (Terraform, CloudFormation)</span>
                 </li>
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">High availability and disaster recovery</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">High availability and disaster recovery</span>
                 </li>
                 
                 <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Cloud security and compliance</span>
+                    <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                    <span class="text-sm text-ink-700">Cloud security and compliance</span>
                 </li>
                 
             </ul>
@@ -343,233 +332,228 @@
 </section>
 
 <!-- Detailed Services - Development -->
-<section class="py-16 md:py-24 bg-secondary-50">
+<section class="py-16 md:py-24 bg-paper-100">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mb-12">
-            <h2 class="text-3xl font-bold mb-4">Development & Operations</h2>
-            <p class="text-lg text-secondary-600">
+            <h2 class="text-3xl font-semibold leading-[1.1] text-ink-800 mb-4">Development &amp; Operations</h2>
+            <p class="text-lg leading-[1.5] text-ink-700">
                 Modern DevOps, SRE practices, and custom software development to deliver secure, scalable, and compliant solutions.
             </p>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             
-            <div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm hover:shadow-xl hover:shadow-primary-600/10 hover:-translate-y-1 transition-all">
-    <div class="flex items-start space-x-4">
-        <div class="flex-shrink-0">
-            <div class="w-12 h-12 bg-gradient-to-br from-primary-100 to-accent-100 rounded-lg flex items-center justify-center">
-                <i data-lucide="git-branch" class="w-6 h-6 text-primary-600"></i>
+            <div class="bg-white rounded-md p-8 shadow-card">
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center">
+                            <i data-lucide="git-branch" class="w-6 h-6 text-brand-500"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-semibold leading-[1.19] mb-2 text-ink-800">DevOps & SRE</h3>
+                        <p class="text-ink-700 mb-4">Implement modern DevOps practices and Site Reliability Engineering to improve delivery and operational excellence.</p>
+                        <ul class="space-y-1.5">
+                            
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-ink-700">CI/CD pipeline development</span>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-ink-700">SRE best practices implementation</span>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-ink-700">Monitoring and observability</span>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-ink-700">Incident management and on-call optimization</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="flex-1">
-            <h3 class="text-xl font-bold mb-2">DevOps & SRE</h3>
-            <p class="text-secondary-600 mb-4">Implement modern DevOps practices and Site Reliability Engineering to improve delivery and operational excellence.</p>
-            <ul class="space-y-2">
-                
-                <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">CI/CD pipeline development</span>
-                </li>
-                
-                <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">SRE best practices implementation</span>
-                </li>
-                
-                <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Monitoring and observability</span>
-                </li>
-                
-                <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Incident management and on-call optimization</span>
-                </li>
-                
-            </ul>
-        </div>
-    </div>
-</div>
-
             
-            <div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm hover:shadow-xl hover:shadow-primary-600/10 hover:-translate-y-1 transition-all">
-    <div class="flex items-start space-x-4">
-        <div class="flex-shrink-0">
-            <div class="w-12 h-12 bg-gradient-to-br from-primary-100 to-accent-100 rounded-lg flex items-center justify-center">
-                <i data-lucide="code" class="w-6 h-6 text-primary-600"></i>
+            <div class="bg-white rounded-md p-8 shadow-card">
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center">
+                            <i data-lucide="code" class="w-6 h-6 text-brand-500"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-semibold leading-[1.19] mb-2 text-ink-800">Custom Software Development</h3>
+                        <p class="text-ink-700 mb-4">Develop secure, scalable software solutions tailored to your specific requirements.</p>
+                        <ul class="space-y-1.5">
+                            
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-ink-700">Full-stack application development</span>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-ink-700">API design and development</span>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-ink-700">Microservices architecture</span>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-ink-700">Security-first development practices</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="flex-1">
-            <h3 class="text-xl font-bold mb-2">Custom Software Development</h3>
-            <p class="text-secondary-600 mb-4">Develop secure, scalable software solutions tailored to your specific requirements.</p>
-            <ul class="space-y-2">
-                
-                <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Full-stack application development</span>
-                </li>
-                
-                <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">API design and development</span>
-                </li>
-                
-                <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Microservices architecture</span>
-                </li>
-                
-                <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Security-first development practices</span>
-                </li>
-                
-            </ul>
-        </div>
-    </div>
-</div>
-
             
-            <div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm hover:shadow-xl hover:shadow-primary-600/10 hover:-translate-y-1 transition-all">
-    <div class="flex items-start space-x-4">
-        <div class="flex-shrink-0">
-            <div class="w-12 h-12 bg-gradient-to-br from-primary-100 to-accent-100 rounded-lg flex items-center justify-center">
-                <i data-lucide="shield" class="w-6 h-6 text-primary-600"></i>
+            <div class="bg-white rounded-md p-8 shadow-card">
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center">
+                            <i data-lucide="shield" class="w-6 h-6 text-brand-500"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-semibold leading-[1.19] mb-2 text-ink-800">Security & Compliance</h3>
+                        <p class="text-ink-700 mb-4">Ensure your systems meet industry standards and regulatory requirements with comprehensive security solutions.</p>
+                        <ul class="space-y-1.5">
+                            
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-ink-700">Security architecture and audits</span>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-ink-700">Compliance consulting (GDPR, eIDAS, HIPAA)</span>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-ink-700">Penetration testing and vulnerability assessment</span>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-500 mr-2 flex-shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-ink-700">Identity and access management</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="flex-1">
-            <h3 class="text-xl font-bold mb-2">Security & Compliance</h3>
-            <p class="text-secondary-600 mb-4">Ensure your systems meet industry standards and regulatory requirements with comprehensive security solutions.</p>
-            <ul class="space-y-2">
-                
-                <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Security architecture and audits</span>
-                </li>
-                
-                <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Compliance consulting (GDPR, eIDAS, HIPAA)</span>
-                </li>
-                
-                <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Penetration testing and vulnerability assessment</span>
-                </li>
-                
-                <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Identity and access management</span>
-                </li>
-                
-            </ul>
-        </div>
-    </div>
-</div>
-
             
         </div>
     </div>
 </section>
 
 <!-- Detailed Services - Consulting -->
-<section class="py-16 md:py-24 bg-white">
+<section class="py-16 md:py-24 bg-ink-900">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="mb-12">
-            <h2 class="text-3xl font-bold mb-4">Architecture & Advisory</h2>
-            <p class="text-lg text-secondary-600">
+            <h2 class="text-3xl font-semibold leading-[1.1] text-white mb-4">Architecture &amp; Advisory</h2>
+            <p class="text-lg leading-[1.5] text-white/80">
                 Strategic technical guidance for infrastructure modernization, technology selection, and compliance requirements.
             </p>
         </div>
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             
-            <div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm hover:shadow-xl hover:shadow-primary-600/10 hover:-translate-y-1 transition-all">
-    <div class="flex items-start space-x-4">
-        <div class="flex-shrink-0">
-            <div class="w-12 h-12 bg-gradient-to-br from-primary-100 to-accent-100 rounded-lg flex items-center justify-center">
-                <i data-lucide="layers" class="w-6 h-6 text-primary-600"></i>
+            <div class="bg-darksurf-1 rounded-md p-8">
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 rounded-md bg-brand-darklink/10 flex items-center justify-center">
+                            <i data-lucide="layers" class="w-6 h-6 text-brand-darklink"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-semibold leading-[1.19] mb-2 text-white">Architecture Consulting</h3>
+                        <p class="text-white/80 mb-4">Expert guidance on system architecture, technology selection, and scalability planning.</p>
+                        <ul class="space-y-1.5">
+                            
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-darklink mr-2 flex-shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-white/80">Architecture design and review</span>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-darklink mr-2 flex-shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-white/80">Technology stack assessment</span>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-darklink mr-2 flex-shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-white/80">Scalability and performance optimization</span>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-darklink mr-2 flex-shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-white/80">Migration strategy and planning</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="flex-1">
-            <h3 class="text-xl font-bold mb-2">Architecture Consulting</h3>
-            <p class="text-secondary-600 mb-4">Expert guidance on system architecture, technology selection, and scalability planning.</p>
-            <ul class="space-y-2">
-                
-                <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Architecture design and review</span>
-                </li>
-                
-                <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Technology stack assessment</span>
-                </li>
-                
-                <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Scalability and performance optimization</span>
-                </li>
-                
-                <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Migration strategy and planning</span>
-                </li>
-                
-            </ul>
-        </div>
-    </div>
-</div>
-
             
-            <div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm hover:shadow-xl hover:shadow-primary-600/10 hover:-translate-y-1 transition-all">
-    <div class="flex items-start space-x-4">
-        <div class="flex-shrink-0">
-            <div class="w-12 h-12 bg-gradient-to-br from-primary-100 to-accent-100 rounded-lg flex items-center justify-center">
-                <i data-lucide="lightbulb" class="w-6 h-6 text-primary-600"></i>
+            <div class="bg-darksurf-1 rounded-md p-8">
+                <div class="flex items-start space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-12 h-12 rounded-md bg-brand-darklink/10 flex items-center justify-center">
+                            <i data-lucide="lightbulb" class="w-6 h-6 text-brand-darklink"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-semibold leading-[1.19] mb-2 text-white">Technical Advisory</h3>
+                        <p class="text-white/80 mb-4">Strategic technical guidance for digital transformation and infrastructure modernization initiatives.</p>
+                        <ul class="space-y-1.5">
+                            
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-darklink mr-2 flex-shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-white/80">Technology roadmap development</span>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-darklink mr-2 flex-shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-white/80">Vendor and solution evaluation</span>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-darklink mr-2 flex-shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-white/80">Risk assessment and mitigation</span>
+                            </li>
+                            
+                            <li class="flex items-start">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-brand-darklink mr-2 flex-shrink-0 mt-0.5"></i>
+                                <span class="text-sm text-white/80">Team capability building</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="flex-1">
-            <h3 class="text-xl font-bold mb-2">Technical Advisory</h3>
-            <p class="text-secondary-600 mb-4">Strategic technical guidance for digital transformation and infrastructure modernization initiatives.</p>
-            <ul class="space-y-2">
-                
-                <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Technology roadmap development</span>
-                </li>
-                
-                <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Vendor and solution evaluation</span>
-                </li>
-                
-                <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Risk assessment and mitigation</span>
-                </li>
-                
-                <li class="flex items-start">
-                    <i data-lucide="check-circle" class="w-4 h-4 text-primary-600 mr-2 flex-shrink-0 mt-0.5"></i>
-                    <span class="text-sm text-secondary-700">Team capability building</span>
-                </li>
-                
-            </ul>
-        </div>
-    </div>
-</div>
-
             
         </div>
     </div>
 </section>
 
 <!-- About Section -->
-<section id="about" class="py-16 md:py-24 bg-gradient-to-br from-primary-50 via-white to-accent-50">
+<section id="about" class="py-16 md:py-24 bg-paper-50">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl mx-auto text-center mb-12">
-            <h2 class="text-4xl md:text-5xl font-bold mb-6">
-                About <span class="text-gradient">Octostack</span>
+            <h2 class="text-4xl md:text-5xl font-semibold leading-[1.1] text-ink-800 mb-6">
+                About Octostack
             </h2>
-            <p class="text-lg md:text-xl text-secondary-600">
+            <p class="text-lg md:text-xl leading-[1.5] text-ink-700">
                 We are a team of cloud experts passionate about helping businesses succeed in the digital age through cutting-edge technology and proven best practices.
             </p>
         </div>
@@ -577,63 +561,63 @@
 </section>
 
 <!-- Company Values -->
-<section class="py-16 md:py-24 bg-white">
+<section class="py-16 md:py-24 bg-paper-100">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold mb-8">Our Values</h2>
+        <h2 class="text-3xl font-semibold leading-[1.1] text-ink-800 mb-8">Our Values</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             
-            <div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm hover:shadow-xl hover:shadow-primary-600/10 hover:-translate-y-1 transition-all">
+            <div class="bg-white rounded-md p-8 shadow-card">
                 <div class="flex items-start space-x-4">
                     <div class="flex-shrink-0">
-                        <div class="w-12 h-12 bg-gradient-to-br from-primary-100 to-accent-100 rounded-lg flex items-center justify-center">
-                            <i data-lucide="target" class="w-6 h-6 text-primary-600"></i>
+                        <div class="w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center">
+                            <i data-lucide="target" class="w-6 h-6 text-brand-500"></i>
                         </div>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold mb-2">Security & Compliance</h3>
-                        <p class="text-secondary-600">We prioritize security and regulatory compliance in every solution we deliver, especially for sensitive identity and health data.</p>
+                        <h3 class="text-xl font-semibold leading-[1.19] text-ink-800 mb-2">Security & Compliance</h3>
+                        <p class="text-ink-700">We prioritize security and regulatory compliance in every solution we deliver, especially for sensitive identity and health data.</p>
                     </div>
                 </div>
             </div>
             
-            <div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm hover:shadow-xl hover:shadow-primary-600/10 hover:-translate-y-1 transition-all">
+            <div class="bg-white rounded-md p-8 shadow-card">
                 <div class="flex items-start space-x-4">
                     <div class="flex-shrink-0">
-                        <div class="w-12 h-12 bg-gradient-to-br from-primary-100 to-accent-100 rounded-lg flex items-center justify-center">
-                            <i data-lucide="award" class="w-6 h-6 text-primary-600"></i>
+                        <div class="w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center">
+                            <i data-lucide="award" class="w-6 h-6 text-brand-500"></i>
                         </div>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold mb-2">Technical Excellence</h3>
-                        <p class="text-secondary-600">Deep expertise in cloud infrastructure, SRE practices, and modern software development methodologies.</p>
+                        <h3 class="text-xl font-semibold leading-[1.19] text-ink-800 mb-2">Technical Excellence</h3>
+                        <p class="text-ink-700">Deep expertise in cloud infrastructure, SRE practices, and modern software development methodologies.</p>
                     </div>
                 </div>
             </div>
             
-            <div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm hover:shadow-xl hover:shadow-primary-600/10 hover:-translate-y-1 transition-all">
+            <div class="bg-white rounded-md p-8 shadow-card">
                 <div class="flex items-start space-x-4">
                     <div class="flex-shrink-0">
-                        <div class="w-12 h-12 bg-gradient-to-br from-primary-100 to-accent-100 rounded-lg flex items-center justify-center">
-                            <i data-lucide="users" class="w-6 h-6 text-primary-600"></i>
+                        <div class="w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center">
+                            <i data-lucide="users" class="w-6 h-6 text-brand-500"></i>
                         </div>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold mb-2">European Focus</h3>
-                        <p class="text-secondary-600">Specialized knowledge of European regulations including eIDAS, GDPR, and gematik standards.</p>
+                        <h3 class="text-xl font-semibold leading-[1.19] text-ink-800 mb-2">European Focus</h3>
+                        <p class="text-ink-700">Specialized knowledge of European regulations including eIDAS, GDPR, and gematik standards.</p>
                     </div>
                 </div>
             </div>
             
-            <div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm hover:shadow-xl hover:shadow-primary-600/10 hover:-translate-y-1 transition-all">
+            <div class="bg-white rounded-md p-8 shadow-card">
                 <div class="flex items-start space-x-4">
                     <div class="flex-shrink-0">
-                        <div class="w-12 h-12 bg-gradient-to-br from-primary-100 to-accent-100 rounded-lg flex items-center justify-center">
-                            <i data-lucide="trending-up" class="w-6 h-6 text-primary-600"></i>
+                        <div class="w-12 h-12 rounded-md bg-brand-500/10 flex items-center justify-center">
+                            <i data-lucide="trending-up" class="w-6 h-6 text-brand-500"></i>
                         </div>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold mb-2">Open Communication</h3>
-                        <p class="text-secondary-600">Clear, transparent communication in German, English, and Chinese for international collaboration.</p>
+                        <h3 class="text-xl font-semibold leading-[1.19] text-ink-800 mb-2">Open Communication</h3>
+                        <p class="text-ink-700">Clear, transparent communication in German, English, and Chinese for international collaboration.</p>
                     </div>
                 </div>
             </div>
@@ -643,61 +627,61 @@
 </section>
 
 <!-- Contact Section -->
-<section id="contact" class="py-16 md:py-24 bg-white">
+<section id="contact" class="py-16 md:py-24 bg-paper-50">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl mx-auto text-center mb-12">
-            <h2 class="text-4xl md:text-5xl font-bold mb-6">
-                Get in <span class="text-gradient">Touch</span>
+            <h2 class="text-4xl md:text-5xl font-semibold leading-[1.1] text-ink-800 mb-6">
+                Get in Touch
             </h2>
-            <p class="text-lg md:text-xl text-secondary-600">
+            <p class="text-lg md:text-xl leading-[1.5] text-ink-700">
                 Ready to transform your cloud infrastructure? Let's discuss how we can help you achieve your goals.
             </p>
         </div>
 
         <div class="max-w-3xl mx-auto mt-12">
-            <h3 class="text-2xl font-bold mb-6">Contact Details</h3>
+            <h3 class="text-2xl font-semibold leading-[1.19] text-ink-800 mb-6">Contact Details</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Contact Details Card -->
-                <div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm">
-                    <h3 class="text-xl font-bold mb-4">Contact Details</h3>
+                <div class="bg-paper-100 rounded-md p-8 shadow-card">
+                    <h3 class="text-xl font-semibold leading-[1.19] text-ink-800 mb-4">Contact Details</h3>
                     <div class="space-y-4">
                         <div class="flex items-start space-x-3">
-                            <i data-lucide="user" class="w-5 h-5 text-primary-600 mt-1 flex-shrink-0"></i>
+                            <i data-lucide="user" class="w-5 h-5 text-brand-500 mt-1 flex-shrink-0"></i>
                             <div>
-                                <p class="font-semibold">Name</p>
-                                <p class="text-secondary-600">Liang Shi</p>
+                                <p class="font-semibold text-ink-800">Name</p>
+                                <p class="text-ink-700">Liang Shi</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
-                            <i data-lucide="mail" class="w-5 h-5 text-primary-600 mt-1 flex-shrink-0"></i>
+                            <i data-lucide="mail" class="w-5 h-5 text-brand-500 mt-1 flex-shrink-0"></i>
                             <div>
-                                <p class="font-semibold">Email</p>
-                                <a href="mailto:hello@octostack.de" class="text-secondary-600 hover:text-primary-600 transition-colors">
+                                <p class="font-semibold text-ink-800">Email</p>
+                                <a href="mailto:hello@octostack.de" class="text-brand-link hover:underline transition-colors">
                                     hello@octostack.de
                                 </a>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
-                            <i data-lucide="map-pin" class="w-5 h-5 text-primary-600 mt-1 flex-shrink-0"></i>
+                            <i data-lucide="map-pin" class="w-5 h-5 text-brand-500 mt-1 flex-shrink-0"></i>
                             <div>
-                                <p class="font-semibold">Location</p>
-                                <p class="text-secondary-600">Berlin, Germany</p>
+                                <p class="font-semibold text-ink-800">Location</p>
+                                <p class="text-ink-700">Berlin, Germany</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Social Media Card -->
-                <div class="bg-white border border-secondary-200 rounded-xl p-6 shadow-sm">
-                    <h3 class="text-xl font-bold mb-4">Follow Us</h3>
+                <div class="bg-paper-100 rounded-md p-8 shadow-card">
+                    <h3 class="text-xl font-semibold leading-[1.19] text-ink-800 mb-4">Follow Us</h3>
                     <div class="flex space-x-4">
                         <a href="https://www.linkedin.com/in/liang-shi-berlin/" target="_blank" rel="noopener noreferrer"
-                           class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center text-primary-600 hover:bg-primary-600 hover:text-white transition-colors"
+                           class="w-10 h-10 rounded-md bg-brand-500/10 flex items-center justify-center text-brand-500 hover:bg-brand-500 hover:text-white transition-colors"
                            aria-label="LinkedIn">
                             <i data-lucide="linkedin" class="w-5 h-5"></i>
                         </a>
                         <a href="https://github.com/octostack-de/" target="_blank" rel="noopener noreferrer"
-                           class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center text-primary-600 hover:bg-primary-600 hover:text-white transition-colors"
+                           class="w-10 h-10 rounded-md bg-brand-500/10 flex items-center justify-center text-brand-500 hover:bg-brand-500 hover:text-white transition-colors"
                            aria-label="GitHub">
                             <i data-lucide="github" class="w-5 h-5"></i>
                         </a>
@@ -710,7 +694,7 @@
 
     </main>
 
-    <footer class="bg-secondary-900 text-secondary-300">
+    <footer class="bg-ink-800 text-white/70">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="py-12 md:py-16">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
@@ -721,13 +705,10 @@
                     </div>
                     <p class="text-sm mb-4">Digital Identity & Healthcare Infrastructure Specialists</p>
                     <div class="flex space-x-4">
-                        <a href="https://www.linkedin.com/in/liang-shi-berlin/" target="_blank" rel="noopener noreferrer" class="hover:text-primary-400 transition-colors" aria-label="LinkedIn">
+                        <a href="https://www.linkedin.com/in/liang-shi-berlin/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="LinkedIn">
                             <i data-lucide="linkedin" class="w-5 h-5"></i>
                         </a>
-                        <a href="https://twitter.com/octostack" target="_blank" rel="noopener noreferrer" class="hover:text-primary-400 transition-colors" aria-label="Twitter">
-                            <i data-lucide="twitter" class="w-5 h-5"></i>
-                        </a>
-                        <a href="https://github.com/octostack-de/" target="_blank" rel="noopener noreferrer" class="hover:text-primary-400 transition-colors" aria-label="GitHub">
+                        <a href="https://github.com/octostack-de/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors" aria-label="GitHub">
                             <i data-lucide="github" class="w-5 h-5"></i>
                         </a>
                     </div>
@@ -737,10 +718,10 @@
                 <div>
                     <h3 class="font-semibold text-white mb-4">Quick Links</h3>
                     <ul class="space-y-2">
-                        <li><a href="#home" class="text-sm hover:text-primary-400 transition-colors">Home</a></li>
-                        <li><a href="#services" class="text-sm hover:text-primary-400 transition-colors">Services</a></li>
-                        <li><a href="#about" class="text-sm hover:text-primary-400 transition-colors">About</a></li>
-                        <li><a href="#contact" class="text-sm hover:text-primary-400 transition-colors">Contact</a></li>
+                        <li><a href="#home" class="text-sm hover:text-white transition-colors">Home</a></li>
+                        <li><a href="#services" class="text-sm hover:text-white transition-colors">Services</a></li>
+                        <li><a href="#about" class="text-sm hover:text-white transition-colors">About</a></li>
+                        <li><a href="#contact" class="text-sm hover:text-white transition-colors">Contact</a></li>
                     </ul>
                 </div>
 
@@ -749,7 +730,7 @@
                     <h3 class="font-semibold text-white mb-4">Contact</h3>
                     <ul class="space-y-2 text-sm">
                         <li>
-                            <a href="mailto:hello@octostack.de" class="flex items-center space-x-2 hover:text-primary-400 transition-colors">
+                            <a href="mailto:hello@octostack.de" class="flex items-center space-x-2 hover:text-white transition-colors">
                                 <i data-lucide="mail" class="w-4 h-4"></i>
                                 <span>hello@octostack.de</span>
                             </a>
@@ -760,7 +741,7 @@
             </div>
 
             <!-- Copyright -->
-            <div class="mt-12 pt-8 border-t border-secondary-800 text-center text-sm">
+            <div class="mt-12 pt-8 border-t border-white/10 text-center text-sm">
                 <p>&copy; <span id="current-year"></span> Octostack. All rights reserved.</p>
             </div>
         </div>
