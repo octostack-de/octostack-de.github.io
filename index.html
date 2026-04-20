@@ -10,8 +10,7 @@
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/InterVariable.woff2" crossorigin>
     <link rel="stylesheet" href="/assets/css/main.css">
 
-    <!-- Lucide Icons CDN -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="/assets/js/lucide.min.js" defer></script>
 </head>
 <body class="flex flex-col min-h-screen">
     <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-[20px] backdrop-saturate-[180%] border-b border-black/5">
@@ -740,8 +739,14 @@
                 </div>
             </div>
 
+            <!-- Legal Links -->
+            <nav class="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row justify-center gap-x-6 gap-y-2 text-sm" aria-label="Legal">
+                <a href="/impressum/" class="hover:text-white transition-colors">Impressum</a>
+                <a href="/datenschutz/" class="hover:text-white transition-colors">Datenschutzerklärung</a>
+            </nav>
+
             <!-- Copyright -->
-            <div class="mt-12 pt-8 border-t border-white/10 text-center text-sm">
+            <div class="mt-6 text-center text-sm">
                 <p>&copy; <span id="current-year"></span> Octostack. All rights reserved.</p>
             </div>
         </div>
@@ -755,8 +760,9 @@
 
     <script src="/assets/js/main.js"></script>
     <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
+        document.addEventListener('DOMContentLoaded', function () {
+            lucide.createIcons();
+        });
     </script>
 </body>
 </html>
