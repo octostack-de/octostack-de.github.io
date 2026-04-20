@@ -7,6 +7,10 @@
     <meta name="description" content="Specialized infrastructure, SRE, and software development for digital identity systems, EUDI Wallet implementations, and gematik-compliant digital health solutions.">
     <meta name="keywords" content="digital identity, EUDI Wallet, eIDAS, digital health, gematik, Telematikinfrastruktur, identity infrastructure, healthcare IT, SRE, DevOps, cloud infrastructure">
 
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="/assets/images/octostack-64.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/octostack-180.png">
+
     <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/InterVariable.woff2" crossorigin>
     <link rel="stylesheet" href="/assets/css/main.css">
 
@@ -17,8 +21,10 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20 md:h-24">
             <!-- Logo -->
-            <a href="/" class="flex items-center space-x-3">
-                <img src="/assets/images/octostack-white.png" alt="Octostack Logo" class="h-12 md:h-16 w-auto">
+            <a href="/"
+               aria-label="Octostack home"
+               class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+                <img src="/assets/images/octostack-logo.png" alt="Octostack Logo" class="h-12 md:h-16 w-auto">
             </a>
 
             <!-- Desktop Navigation -->
@@ -41,8 +47,13 @@
             </nav>
 
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden p-2 text-ink-700 hover:text-ink-800" aria-label="Toggle menu">
-                <i data-lucide="menu" class="w-6 h-6"></i>
+            <button id="mobile-menu-btn"
+                    class="md:hidden p-2 text-ink-700 hover:text-ink-800"
+                    aria-label="Toggle menu"
+                    aria-expanded="false"
+                    aria-controls="mobile-menu">
+                <i data-lucide="menu" class="w-6 h-6" id="menu-icon"></i>
+                <i data-lucide="x" class="w-6 h-6 hidden" id="close-icon"></i>
             </button>
         </div>
 
@@ -124,7 +135,7 @@ Geschäftsführer: Liang Shi</p>
                 <!-- Company Info -->
                 <div>
                     <div class="mb-4">
-                        <img src="/assets/images/octostack-white.png" alt="Octostack Logo" class="h-12 w-auto">
+                        <img src="/assets/images/octostack-logo.png" alt="Octostack Logo" class="h-12 w-auto">
                     </div>
                     <p class="text-sm mb-4">Digital Identity & Healthcare Infrastructure Specialists</p>
                     <div class="flex space-x-4">
