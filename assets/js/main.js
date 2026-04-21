@@ -91,4 +91,13 @@ document.addEventListener('DOMContentLoaded', function() {
             if (el) observer.observe(el);
         });
     }
+
+    // Language switcher: preserve the current hash when switching locales.
+    document.querySelectorAll('[data-locale-switch]').forEach(function(a) {
+        a.addEventListener('click', function() {
+            if (window.location.hash) {
+                a.href = a.getAttribute('href').split('#')[0] + window.location.hash;
+            }
+        });
+    });
 });
